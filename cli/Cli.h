@@ -1,0 +1,4 @@
+#ifndef KNN_CLASSIFIER_CLI_H
+#define KNN_CLASSIFIER_CLI_H
+
+#endif
