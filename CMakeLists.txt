@@ -3,6 +3,10 @@ project(KNN-Classifier)
 
 set(CMAKE_CXX_STANDARD 11)
 
+set(SOCKET
+        "socket/Socket.h"
+        "socket/Socket.cpp"
+)
 
 set(PROJECT_HEADERS
         "classifier/Classified.h"
@@ -23,7 +27,7 @@ set(PROJECT_SOURCES
     "classifier/Classifier.cpp"
 )
 
-add_executable(Server ${PROJECT_HEADERS} ${PROJECT_SOURCES} server/server.cpp)
-add_executable(Client client/client.cpp)
+add_executable(Server ${SOCKET} ${PROJECT_HEADERS} ${PROJECT_SOURCES} server/server.cpp)
+add_executable(Client ${SOCKET} client/client.cpp)
 
 

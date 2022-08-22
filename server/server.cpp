@@ -1,76 +1,36 @@
 #include "../classifier/Classifier.h"
 #include "../classifier/distance/EuclideanDistance.h"
-#include <netinet/in.h>
-#include <sys/socket.h>
-#include <unistd.h>
-#include <cstring>
+#include "../socket/Socket.h"
 #include <memory>
-#include <iostream>
 
 int main() {
     // Server Constants
     const int server_port = 5555;
     const int k = 5;
 
-    // Create a socket for the server
-    int sock = socket(AF_INET, SOCK_STREAM, 0);
-    if (sock < 0) {
-        perror("Error creating socket");
-    }
+    // Create a socket, and bind a name to it
+    std::unique_ptr<Socket> socket(new Socket);
+    socket->bind(server_port);
 
-    // Bind the socket
-    struct sockaddr_in sin;
-    memset(&sin, 0, sizeof(sin));
-    sin.sin_family = AF_INET;
-    sin.sin_addr.s_addr = INADDR_ANY;
-    sin.sin_port = htons(server_port);
+    // Listen for a connection, and accept it
+    socket->listen();
+    int client_sock = socket->accept();
 
-    if (bind(sock, (struct sockaddr *) &sin, sizeof(sin)) < 0) {
-        perror("Error binding socket");
-    }
-
-    // Add a timeout mechanism
-    struct timeval timeval;
-    timeval.tv_sec = 10;
-    timeval.tv_usec = 0;
-    setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, (const char*)& timeval, sizeof(timeval));
-
-    // Listen for a connection, and accept the client
-    if (listen(sock, 5) < 0) {
-        perror("Error listening to a socket");
-    }
-
-    struct sockaddr_in client_sin;
-    unsigned int addr_len = sizeof(client_sin);
-    int client_sock = accept(sock,  (struct sockaddr*)& client_sin,  &addr_len);
-
-    if (client_sock < 0) {
-        perror("Error accepting client");
-    }
-
-    // Receive the unclassified data from the user
+    // Receive the unclassified data
     char buffer[512] = {0};
-    int expected_data_len = sizeof(buffer);
-    int read_bytes = recv(client_sock, buffer, expected_data_len, 0);
-
-    if (read_bytes <= 0) {
-        perror("Error communicating with the server");
-    }
+    socket->recv(buffer, 512, client_sock);
 
     // Create a classifier
     std::unique_ptr<Classifier> classifier(new Classifier(k));
     classifier->initFromFile("../server/Data/Classified.csv");
 
-    // Classify the data
+    // Classify the data, and send the classifications to the client
     std::unique_ptr<Distance> metric(new EuclideanDistance());
     std::string res = classifier->classify(buffer, *metric);
 
-    // Send the classified data to the client
-    int sent_bytes = send(client_sock, res.c_str(), res.size(), 0);
-    if (sent_bytes < 0) {
-        perror("Error sending classifications to the client");
-    }
+    socket->send(res, client_sock);
 
-    close(sock);
+    // Finish the program
+    socket->close();
     return 0;
 }
