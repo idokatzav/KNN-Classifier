@@ -3,7 +3,7 @@
 
 #include "../IO/DefaultIO.h"
 #include "../../classifier/Classifier.h"
-#include "../../ClassifierData/ClassifierData.h"
+#include "../../classifierData/ClassifierData.h"
 #include <string>
 #include <memory>
 
