@@ -10,7 +10,6 @@ class Command {
 private:
     std::string m_description;
     std::unique_ptr<DefaultIO> m_dio;
-    std::unique_ptr<Classifier> m_classifier;
 public:
     virtual void execute() = 0;
 };

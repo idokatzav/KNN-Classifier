@@ -1,6 +1,8 @@
 #ifndef KNN_CLASSIFIER_DEFAULTIO_H
 #define KNN_CLASSIFIER_DEFAULTIO_H
 
+#include <string>
+
 class DefaultIO {
 public:
     /**
