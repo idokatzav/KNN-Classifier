@@ -19,3 +19,7 @@ void ClassifierData::unclassifiedData(const std::string &unclassifiedData) {
 std::string ClassifierData::classifiedData() const {
     return m_classifiedData;
 }
+
+void ClassifierData::classifiedData(const std::string& classifiedData) {
+    m_classifiedData = classifiedData;
+}
