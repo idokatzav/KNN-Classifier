@@ -31,3 +31,7 @@ std::string ClassifierData::classifiedData() const {
 void ClassifierData::classifiedData(const std::string& classifiedData) {
     m_classifiedData = classifiedData;
 }
+
+std::string ClassifierData::getMetric() {
+    return m_metric->metricString();
+}

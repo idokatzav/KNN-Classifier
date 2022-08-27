@@ -24,6 +24,10 @@ void Classifier::k(int k) {
     m_k = k;
 }
 
+int Classifier::k() {
+    return m_k;
+}
+
 void Classifier::metric(std::unique_ptr<Distance> metric) {
     m_metric = std::move(metric);
 }

@@ -57,6 +57,12 @@ public:
      * @param classifiedData the classified data
      */
    void classifiedData(const std::string& classifiedData);
+
+   /**
+    * getter for the metric settings
+    * @return the string of the metric
+    */
+   std::string getMetric();
 };
 
 #endif
