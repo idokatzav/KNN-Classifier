@@ -11,19 +11,27 @@ private:
     int m_k;
     bool m_isInit;
     std::vector<std::unique_ptr<Classified>> m_classifiedData;
+    std::unique_ptr<Distance> m_metric;
 
 public:
     /**
      * Constructor.
      * @param k the parameter used in the KNN algorithm
+     * @param the metric used in the KNN algorithm
      */
-    Classifier(int k);
+    Classifier(int k, std::unique_ptr<Distance> metric);
 
     /**
-     * Initialize the classified data the KNN algorithm will utilise, from a CSV file.
-     * @param dataPath the path to the classified data
+     * k setter.
+     * @param k the new integer to be used in the KNN algorithm.
      */
-    void initFromFile(const std::string& dataPath);
+    void k(int k);
+
+    /**
+     * metric setter.
+     * @param k the new metric to be used in the KNN algorithm.
+     */
+    void metric(std::unique_ptr<Distance> metric);
 
     /**
      * Given unclassified data and a distance metric, this method uses
@@ -31,7 +39,7 @@ public:
      * @param unclassified an unclassified object
      * @param distance a distance metric
      */
-    void classify(Classified& unclassified, const Distance& metric) const;
+    void classify(Classified& unclassified) const;
 
     /**
      * Given unclassified data in a csv format, this method uses
@@ -40,7 +48,7 @@ public:
      * @param distance a distance metric
      * @return a string in a csv format with the classified data
      */
-    std::string classify(const std::string& unclassifiedData, const Distance& metric) const;
+    std::string classify(const std::string& unclassifiedData) const;
 };
 
 #endif

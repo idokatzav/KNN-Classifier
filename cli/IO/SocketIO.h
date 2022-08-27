@@ -1,0 +1,4 @@
+#ifndef KNN_CLASSIFIER_SOCKETIO_H
+#define KNN_CLASSIFIER_SOCKETIO_H
+
+#endif

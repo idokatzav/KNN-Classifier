@@ -4,7 +4,6 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <cstring>
-#include <memory>
 
 Socket::Socket() {
     // Create the socket

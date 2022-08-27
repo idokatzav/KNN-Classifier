@@ -3,6 +3,9 @@
 
 #include <string>
 
+/**
+ * This class represents a socket that communicates with others using the TCP protocol.
+ */
 class Socket {
 private:
     static const int BUFFER_LIM = 512;

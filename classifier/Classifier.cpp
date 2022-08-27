@@ -1,26 +1,21 @@
 #include "Classifier.h"
 #include "distance/EuclideanDistance.h"
 #include "Algorithms.h"
-#include <map>
 #include <fstream>
-#include <sstream>
 
-Classifier::Classifier(int k) : m_isInit(false), m_k(k) {}
-
-void Classifier::initFromFile(const std::string& dataPath) {
-    std::string line;
-    std::ifstream inFile(dataPath);
-
-    // Iterate through the csv file, and gather the classified objects' data and classifications
-    while (std::getline(inFile, line)) {
-        m_classifiedData.push_back(Classified::fromLine(line));
-    }
-
-    inFile.close();
-    m_isInit = true;
+Classifier::Classifier(int k, std::unique_ptr<Distance> metric) : m_isInit(false), m_k(k) {
+    m_metric = std::move(metric);
 }
 
-void Classifier::classify(Classified& unclassified, const Distance& metric) const {
+void Classifier::k(int k) {
+    m_k = k;
+}
+
+void Classifier::metric(std::unique_ptr<Distance> metric) {
+    m_metric = std::move(metric);
+}
+
+void Classifier::classify(Classified& unclassified) const {
     if (!m_isInit) {
         throw std::runtime_error("Classifier uninitialized");
     }
@@ -31,7 +26,7 @@ void Classifier::classify(Classified& unclassified, const Distance& metric) cons
 
     for (int i = 0; i < dataSize; ++i) {
         try {
-            distances.push_back(metric.distance(unclassified.data(), m_classifiedData[i]->data()));
+            distances.push_back(m_metric->distance(unclassified.data(), m_classifiedData[i]->data()));
         } catch (const std::invalid_argument& ia) {
             unclassified.handle("");
             return;
@@ -56,13 +51,13 @@ void Classifier::classify(Classified& unclassified, const Distance& metric) cons
     unclassified.handle(maxKey(map));
 }
 
-std::string Classifier::classify(const std::string& unclassifiedData, const Distance& metric) const {
+std::string Classifier::classify(const std::string& unclassifiedData) const {
     std::vector<std::string> lines = split(unclassifiedData, '\n');
     std::string res;
 
     for (int i = 0; i < lines.size(); ++i) {
         std::unique_ptr<Classified> unclassified = Classified::fromLine(lines[i]);
-        classify(*unclassified, metric);
+        classify(*unclassified);
         res += unclassified->handle() + "\n";
     }
 

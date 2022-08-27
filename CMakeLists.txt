@@ -16,8 +16,8 @@ set(PROJECT_HEADERS
         "classifier/Algorithms.h"
         "classifier/distance/ChebyshevDistance.h"
         "classifier/Classifier.h"
-        "cli/Command.h"
-        "cli/DefaultIO.h"
+        "cli/command/Command.h"
+        "cli/IO/DefaultIO.h"
 )
 
 set(PROJECT_SOURCES
@@ -27,8 +27,7 @@ set(PROJECT_SOURCES
     "classifier/Algorithms.cpp"
     "classifier/distance/ChebyshevDistance.cpp"
     "classifier/Classifier.cpp"
-    "cli/DefaultIO.cpp"
-)
+        )
 
 add_executable(Server ${SOCKET} ${PROJECT_HEADERS} ${PROJECT_SOURCES} server/server.cpp)
 add_executable(Client ${SOCKET} client/client.cpp)
