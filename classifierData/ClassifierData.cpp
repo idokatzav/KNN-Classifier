@@ -19,3 +19,7 @@ void ClassifierData::unclassifiedData(const std::string &unclassifiedData) {
 std::string ClassifierData::classifiedData() const {
     return m_classifiedData;
 }
+
+void ClassifierData::setMetric(std::unique_ptr<Distance> metric) {
+    m_metric = std::move(metric);
+}

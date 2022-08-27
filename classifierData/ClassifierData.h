@@ -7,7 +7,7 @@
 class ClassifierData {
 private:
     std::unique_ptr<Classifier> m_classifier;
-        std::unique_ptr<Distance> m_metric;
+    std::unique_ptr<Distance> m_metric;
     std::string m_unclassifiedData;
     std::string m_classifiedData;
 public:
@@ -39,6 +39,11 @@ public:
      * @return the classified data
      */
     std::string classifiedData() const;
+    /**
+     * metric setter.
+     * @param metric a new metric
+     */
+    void setMetric(std::unique_ptr<Distance> metric);
 };
 
 #endif
