@@ -16,4 +16,5 @@ public:
      */
     virtual void write(std::string str) = 0;
 };
+
 #endif
