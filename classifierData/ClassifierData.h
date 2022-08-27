@@ -26,7 +26,7 @@ public:
      * unclassifiedData getter.
      * @return the unclassified data
      */
-    const std::string& unclassifiedData() const;
+    std::string unclassifiedData() const;
 
     /**
      * unclassifiedData setter.
@@ -37,7 +37,7 @@ public:
      * classifiedData getter.
      * @return the classified data
      */
-    const std::string& classifiedData() const;
+    std::string classifiedData() const;
 };
 
 #endif
