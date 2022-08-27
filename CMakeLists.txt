@@ -8,34 +8,70 @@ set(SOCKET
         "socket/Socket.cpp"
 )
 
-set(PROJECT_HEADERS
+set(DISTANCE
         "classifier/distance/Distance.h"
         "classifier/distance/EuclideanDistance.h"
         "classifier/distance/ManhattanDistance.h"
         "classifier/distance/ChebyshevDistance.h"
-        "classifier/Classified.h"
-        "classifier/Classifier.h"
-        "classifier/Algorithms.h"
-        "cli/command/Command.h"
-        "cli/IO/DefaultIO.h"
-        "cli/IO/SocketIO.h"
-        "cli/IO/StandardIO.h"
-        "cli/Cli.h"
-)
-
-set(PROJECT_SOURCES
         "classifier/distance/EuclideanDistance.cpp"
         "classifier/distance/ManhattanDistance.cpp"
         "classifier/distance/ChebyshevDistance.cpp"
+)
+
+set(CLASSIFIER
+        "classifier/Classified.h"
+        "classifier/Classifier.h"
+        "classifier/Algorithms.h"
         "classifier/Classified.cpp"
         "classifier/Classifier.cpp"
         "classifier/Algorithms.cpp"
+)
+
+set(COMMANDS
+        "cli/command/Command.h"
+        "cli/command/ClassifyCommand.h"
+        "cli/command/ClassifyCommand.cpp"
+        "cli/command/DisplayConfusionMatrixCommand.h"
+        "cli/command/DisplayConfusionMatrixCommand.cpp"
+        "cli/command/DisplayResultsCommand.h"
+        "cli/command/DisplayResultsCommand.cpp"
+        "cli/command/DownloadResults.h"
+        "cli/command/DownloadResults.cpp"
+        "cli/command/SettingsCommand.h"
+        "cli/command/SettingsCommand.cpp"
+        "cli/command/UploadCommand.h"
+        "cli/command/UploadCommand.cpp"
+)
+
+set(IO
+        "cli/IO/DefaultIO.h"
+        "cli/IO/SocketIO.h"
         "cli/IO/SocketIO.cpp"
+        "cli/IO/StandardIO.h"
         "cli/IO/StandardIO.cpp"
+)
+
+set(CLI
+        "cli/Cli.h"
         "cli/Cli.cpp"
 )
 
-add_executable(Server ${SOCKET} ${PROJECT_HEADERS} ${PROJECT_SOURCES} server/server.cpp)
-add_executable(Client ${SOCKET} client/client.cpp)
+set(SERVER
+        ${SOCKET}
+        ${DISTANCE}
+        ${CLASSIFIER}
+        ${COMMANDS}
+        ${IO}
+        ${CLI}
+        "server/server.cpp"
+)
+
+set(CLIENT
+        ${SOCKET}
+        "client/client.cpp"
+)
+
+add_executable(Server ${SERVER})
+add_executable(Client ${CLIENT})
 
 
