@@ -49,11 +49,11 @@ set(COMMANDS
 )
 
 set(IO
-        "cli/IO/DefaultIO.h"
-        "cli/IO/SocketIO.h"
-        "cli/IO/SocketIO.cpp"
-        "cli/IO/StandardIO.h"
-        "cli/IO/StandardIO.cpp"
+        "cli/io/DefaultIO.h"
+        "cli/io/SocketIO.h"
+        "cli/io/SocketIO.cpp"
+        "cli/io/StandardIO.h"
+        "cli/io/StandardIO.cpp"
 )
 
 set(CLI
