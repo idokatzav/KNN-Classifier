@@ -1,7 +1,7 @@
 #ifndef KNN_CLASSIFIER_COMMAND_H
 #define KNN_CLASSIFIER_COMMAND_H
 
-#include "../IO/DefaultIO.h"
+#include "../io/DefaultIO.h"
 #include "../../classifier/Classifier.h"
 #include "../../classifierData/ClassifierData.h"
 #include <string>
