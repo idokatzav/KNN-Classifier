@@ -7,6 +7,19 @@ Classifier::Classifier(int k, std::unique_ptr<Distance> metric) : m_isInit(false
     m_metric = std::move(metric);
 }
 
+void Classifier::initFromFile(const std::string& dataPath) {
+    std::string line;
+    std::ifstream inFile(dataPath);
+
+    // Iterate through the csv file, and gather the classified objects' data and classifications
+    while (std::getline(inFile, line)) {
+        m_classifiedData.push_back(Classified::fromLine(line));
+    }
+
+    inFile.close();
+    m_isInit = true;
+}
+
 void Classifier::k(int k) {
     m_k = k;
 }

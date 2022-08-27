@@ -22,6 +22,12 @@ public:
     Classifier(int k, std::unique_ptr<Distance> metric);
 
     /**
+     * Initialize the classified data the KNN algorithm will utilise, from a CSV file.
+     * @param dataPath the path to the classified data
+     */
+    void initFromFile(const std::string& dataPath);
+
+    /**
      * k setter.
      * @param k the new integer to be used in the KNN algorithm.
      */

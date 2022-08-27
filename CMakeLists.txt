@@ -27,6 +27,11 @@ set(CLASSIFIER
         "classifier/Algorithms.cpp"
 )
 
+set(CLASSIFIER_DATA
+        "classifierData/ClassifierData.cpp"
+        "classifierData/ClassifierData.h"
+)
+
 set(COMMANDS
         "cli/command/Command.h"
         "cli/command/ClassifyCommand.h"
@@ -60,6 +65,7 @@ set(SERVER
         ${SOCKET}
         ${DISTANCE}
         ${CLASSIFIER}
+        ${CLASSIFIER_DATA}
         ${COMMANDS}
         ${IO}
         ${CLI}
