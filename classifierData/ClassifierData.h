@@ -7,6 +7,7 @@
 class ClassifierData {
 private:
     std::unique_ptr<Classifier> m_classifier;
+        std::unique_ptr<Distance> m_metric;
     std::string m_unclassifiedData;
     std::string m_classifiedData;
 public:

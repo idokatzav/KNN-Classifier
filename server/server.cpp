@@ -21,14 +21,14 @@ int main() {
     socket->recv(buffer, 512, client_sock);
 
     // Create a classifier
-    std::unique_ptr<Classifier> classifier(new Classifier(k));
-    classifier->initFromFile("../server/Data/Classified.csv");
+//    std::unique_ptr<Classifier> classifier(new Classifier(k));
+//    classifier->initFromFile("../server/Data/Classified.csv");
 
     // Classify the data, and send the classifications to the client
-    std::unique_ptr<Distance> metric(new EuclideanDistance());
-    std::string res = classifier->classify(buffer, *metric);
+//    std::unique_ptr<Distance> metric(new EuclideanDistance());
+//    std::string res = classifier->classify(buffer, *metric);
 
-    socket->send(res, client_sock);
+//    socket->send(res, client_sock);
 
     // Finish the program
     socket->close();
