@@ -2,30 +2,37 @@
 #include "distance/EuclideanDistance.h"
 #include "Algorithms.h"
 #include <fstream>
+#include <sstream>
 
-Classifier::Classifier(int k, std::unique_ptr<Distance> metric) : m_isInit(false), m_k(k) {
-    m_metric = std::move(metric);
+Classifier::Classifier() : m_isInit(false) {
+    // Initialize the classified with default values
+    m_k = 5;
+    m_metric = std::unique_ptr<Distance>(new EuclideanDistance());
 }
 
-void Classifier::initFromFile(const std::string& dataPath) {
+void Classifier::init(const std::string& classifiedData) {
+    std::istringstream f(classifiedData);
     std::string line;
-    std::ifstream inFile(dataPath);
 
     // Iterate through the csv file, and gather the classified objects' data and classifications
-    while (std::getline(inFile, line)) {
+    while (std::getline(f, line)) {
         m_classifiedData.push_back(Classified::fromLine(line));
     }
 
-    inFile.close();
     m_isInit = true;
+}
+
+bool Classifier::isInit() const {
+    return m_isInit;
+}
+
+
+int Classifier::k() const {
+    return m_k;
 }
 
 void Classifier::k(int k) {
     m_k = k;
-}
-
-int Classifier::k() {
-    return m_k;
 }
 
 void Classifier::metric(std::unique_ptr<Distance> metric) {
@@ -72,8 +79,8 @@ std::string Classifier::classify(const std::string& unclassifiedData) const {
     std::vector<std::string> lines = split(unclassifiedData, '\n');
     std::string res;
 
-    for (int i = 0; i < lines.size(); ++i) {
-        std::unique_ptr<Classified> unclassified = Classified::fromLine(lines[i]);
+    for (auto & line : lines) {
+        std::unique_ptr<Classified> unclassified = Classified::fromLine(line);
         classify(*unclassified);
         res += unclassified->handle() + "\n";
     }

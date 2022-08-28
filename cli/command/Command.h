@@ -7,6 +7,9 @@
 #include <string>
 #include <memory>
 
+// TODO:
+// add constructor to Command
+// Fix upload command
 class Command {
 private:
     std::string m_description;

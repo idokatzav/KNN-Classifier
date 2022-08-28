@@ -22,7 +22,7 @@ int main() {
 
     // Create a classifier
 //    std::unique_ptr<Classifier> classifier(new Classifier(k));
-//    classifier->initFromFile("../server/Data/Classified.csv");
+//    classifier->init("../server/Data/Classified.csv");
 
     // Classify the data, and send the classifications to the client
 //    std::unique_ptr<Distance> metric(new EuclideanDistance());

@@ -16,16 +16,25 @@ private:
 public:
     /**
      * Constructor.
-     * @param k the parameter used in the KNN algorithm
-     * @param the metric used in the KNN algorithm
      */
-    Classifier(int k, std::unique_ptr<Distance> metric);
+    Classifier();
 
     /**
-     * Initialize the classified data the KNN algorithm will utilise, from a CSV file.
-     * @param dataPath the path to the classified data
+     * Initialize the classified data the KNN algorithm will utilise.
+     * @param classifiedData the classified data
      */
-    void initFromFile(const std::string& dataPath);
+    void init(const std::string& classifiedData);
+
+    /**
+     * @return whether the classifier has been initialized yet
+     */
+    bool isInit() const;
+
+    /**
+     * k getter.
+     * @return k
+     */
+    int k() const;
 
     /**
      * k setter.
@@ -55,12 +64,6 @@ public:
      * @return a string in a csv format with the classified data
      */
     std::string classify(const std::string& unclassifiedData) const;
-
-    /**
-     * getter for k
-     * @return k
-     */
-    int k();
 };
 
 #endif

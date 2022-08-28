@@ -99,7 +99,7 @@ private:
     std::vector<std::unique_ptr<Classified>> m_classifiedData;
 
 public:
-    void initFromFile(const std::string& dataPath);
+    void init(const std::string& dataPath);
     
     void classify(Classified& unclassified, const Distance& metric) const;
 
@@ -118,7 +118,7 @@ graph LR;
     Accept-->recv;
     recv-->Classify;
 
-    initFromFile-->Classifier;
+    init-->Classifier;
     Classifier-->Classify;
     Classify-->send;
 ```

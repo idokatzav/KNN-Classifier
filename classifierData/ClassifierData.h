@@ -4,6 +4,9 @@
 #include "../classifier/Classifier.h"
 #include <memory>
 
+/**
+ * This class holds all the information needed by the server when communicating with the client.
+ */
 class ClassifierData {
 private:
     std::unique_ptr<Classifier> m_classifier;
