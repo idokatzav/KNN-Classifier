@@ -15,8 +15,8 @@ private:
     std::string m_classifiedData;
 public:
     /**
-     * Constructor;
-     * @param classifier a classifier.
+     * Constructor.
+     * @param classifier a classifier
      */
     ClassifierData(std::unique_ptr<Classifier> classifier);
 
@@ -27,16 +27,16 @@ public:
     Classifier& classifier() const;
 
     /**
+     * metric getter.
+     * @return the metric
+     */
+    Distance& metric() const;
+
+    /**
      * metric setter.
      * @param metric a new metric
      */
     void metric(std::unique_ptr<Distance> metric);
-
-    /**
-     * metric getter.
-     * @return the metric
-     */
-    Distance& metric();
 
     /**
      * unclassifiedData getter.
@@ -60,12 +60,6 @@ public:
      * @param classifiedData the classified data
      */
    void classifiedData(const std::string& classifiedData);
-
-   /**
-    * getter for the metric settings
-    * @return the string of the metric
-    */
-   std::string getMetric();
 };
 
 #endif

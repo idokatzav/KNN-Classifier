@@ -12,6 +12,7 @@ double ChebyshevDistance::distance(const std::vector<double>& v1, const std::vec
 
     return max;
 }
-std::string metricString() {
+
+std::string ChebyshevDistance::name() {
     return "CHE";
 }

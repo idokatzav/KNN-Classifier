@@ -25,7 +25,7 @@ public:
       * get a string of the name of the metric.
       * @return string form of the metric
       */
-     virtual std::string metricString() = 0;
+     virtual std::string name() = 0;
 };
 
 #endif

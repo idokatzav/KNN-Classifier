@@ -16,7 +16,7 @@ public:
       * get a string of the name of the metric.
       * @return string form of the metric
       */
-    std::string metricString() override;
+    std::string name() override;
 };
 
 #endif

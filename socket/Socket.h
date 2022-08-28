@@ -60,7 +60,7 @@ public:
       * @param size the size of the buffer
       * @param socket a socket descriptor
       */
-    void recv(char* buf, int size, int socket) const;
+    static void recv(char* buf, int size, int socket) ;
 
     /**
      * Close the socket.

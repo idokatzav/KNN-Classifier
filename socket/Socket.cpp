@@ -79,7 +79,7 @@ void Socket::send(const std::string& message, int socket) const {
     }
 }
 
-void Socket::recv(char* buf, int size, int socket) const {
+void Socket::recv(char* buf, int size, int socket) {
     if (size < BUFFER_LIM) {
         fprintf(stderr,"Buffer size must be at least %d", BUFFER_LIM);
     }
