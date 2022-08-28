@@ -7,9 +7,6 @@
 #include <string>
 #include <memory>
 
-// TODO:
-// add constructor to Command
-// Fix upload command
 class Command {
 protected:
     std::string m_description;
@@ -18,6 +15,8 @@ protected:
 
 public:
     Command(DefaultIO* dio, ClassifierData* classifierData);
+
+    std::string description() const;
 
     virtual void execute() = 0;
 };
