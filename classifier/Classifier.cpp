@@ -7,7 +7,7 @@
 Classifier::Classifier() : m_isInit(false) {
     // Initialize the classified with default values
     m_k = 5;
-    m_metric = std::unique_ptr<Distance>(new EuclideanDistance());
+    m_metric =  std::unique_ptr<Distance>(new EuclideanDistance());
 }
 
 void Classifier::init(const std::string& classifiedData) {
@@ -26,7 +26,6 @@ bool Classifier::isInit() const {
     return m_isInit;
 }
 
-
 int Classifier::k() const {
     return m_k;
 }
@@ -35,7 +34,7 @@ void Classifier::k(int k) {
     m_k = k;
 }
 
-void Classifier::metric() const {
+Distance& Classifier::metric() const {
     return *m_metric;
 }
 

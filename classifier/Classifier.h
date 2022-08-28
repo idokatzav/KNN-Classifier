@@ -46,13 +46,13 @@ public:
      * metric getter.
      * @return the metric used in the KNN algorithm
      */
-    void metric(std::unique_ptr<Distance> metric);
+    Distance& metric() const;
 
     /**
      * metric setter.
      * @param metric the new metric to be used in the KNN algorithm
      */
-    void metric() const;
+    void metric(std::unique_ptr<Distance> metric);
 
     /**
      * Given unclassified data and a distance metric, this method uses
