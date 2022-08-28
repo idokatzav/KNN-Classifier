@@ -1,6 +1,6 @@
 #include "UploadCommand.h"
 
-UploadCommand::UploadCommand() {
+UploadCommand::UploadCommand(DefaultIO *dio, ClassifierData *classifierData) : Command(dio, classifierData) {
     m_description = "upload an unclassified csv data file";
 }
 

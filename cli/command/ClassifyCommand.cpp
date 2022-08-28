@@ -1,6 +1,6 @@
 #include "ClassifyCommand.h"
 
-ClassifyCommand::ClassifyCommand() {
+ClassifyCommand::ClassifyCommand(DefaultIO *dio, ClassifierData *classifierData) : Command(dio, classifierData) {
     m_description = "classify data";
 }
 

@@ -8,8 +8,23 @@
 class Cli {
 private:
     std::unique_ptr<DefaultIO> m_dio;
+    std::vector<Command*> m_commands;
+
 public:
+    /**
+     * constructor.
+     */
+    Cli();
+
+    /**
+     * start the cli.
+     */
     void start();
+
+    /**
+     * destructor.
+     */
+    ~Cli();
 };
 
 

@@ -11,12 +11,14 @@
 // add constructor to Command
 // Fix upload command
 class Command {
-private:
+protected:
     std::string m_description;
-    std::unique_ptr<DefaultIO> m_dio;
-    std::unique_ptr<ClassifierData> m_classifierData;
+    DefaultIO* m_dio;
+    ClassifierData* m_classifierData;
 
 public:
+    Command(DefaultIO* dio, ClassifierData* classifierData);
+
     virtual void execute() = 0;
 };
 
