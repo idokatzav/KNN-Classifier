@@ -5,15 +5,26 @@ UploadCommand::UploadCommand() {
 }
 
 void UploadCommand::execute() {
-    // Greet the user
-    m_dio->write("Please upload your local train CSV file.");
+    // If the classifier hasn't been initialized yet
+    if (!m_classifierData->classifier().isInit()) {
+        // Greet the user
+        m_dio->write("Please upload your local train CSV file.");
 
-    // Receive the unclassified data from the client
-    std::string data = m_dio->read();
+        // Receive the classified data from the client
+        std::string classifiedData = m_dio->read();
 
-    // Save the unclassified data
-    m_classifierData->unclassifiedData(data);
+        // Initialize the classifier
+        m_classifierData->classifier().init(classifiedData);
+    } else {
+        // Greet the user
+        m_dio->write("Please upload your local test CSV file.");
 
-    // Let the user know the unclassified data has been saved
-    m_dio->write("Upload complete");
+        // Receive the unclassified data from the client
+        std::string unclassifiedData = m_dio->read();
+
+        // Save the data
+        m_classifierData->unclassifiedData(unclassifiedData);
+    }
+
+    m_dio->write("Upload complete.");
 }
