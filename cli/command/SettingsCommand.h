@@ -16,6 +16,9 @@ public:
      * @param classifierData classifierData Object
      */
     SettingsCommand(DefaultIO* dio, ClassifierData* classifierData);
-    void execute();
+    /**
+     * execute command
+     */
+    void execute() override;
 };
 #endif
