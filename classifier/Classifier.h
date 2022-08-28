@@ -10,8 +10,8 @@ class Classifier {
 private:
     int m_k;
     bool m_isInit;
-    std::vector<std::unique_ptr<Classified>> m_classifiedData;
     std::unique_ptr<Distance> m_metric;
+    std::vector<std::unique_ptr<Classified>> m_classifiedData;
 
 public:
     /**
@@ -38,15 +38,21 @@ public:
 
     /**
      * k setter.
-     * @param k the new integer to be used in the KNN algorithm.
+     * @param k the new integer to be used in the KNN algorithm
      */
     void k(int k);
 
     /**
-     * metric setter.
-     * @param k the new metric to be used in the KNN algorithm.
+     * metric getter.
+     * @return the metric used in the KNN algorithm
      */
     void metric(std::unique_ptr<Distance> metric);
+
+    /**
+     * metric setter.
+     * @param metric the new metric to be used in the KNN algorithm
+     */
+    void metric() const;
 
     /**
      * Given unclassified data and a distance metric, this method uses

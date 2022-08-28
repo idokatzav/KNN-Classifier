@@ -8,14 +8,6 @@ Classifier& ClassifierData::classifier() const {
     return *m_classifier;
 }
 
-Distance& ClassifierData::metric() const {
-    return *m_metric;
-}
-
-void ClassifierData::metric(std::unique_ptr<Distance> metric) {
-    m_metric = std::move(metric);
-}
-
 std::string ClassifierData::unclassifiedData() const {
     return m_unclassifiedData;
 }

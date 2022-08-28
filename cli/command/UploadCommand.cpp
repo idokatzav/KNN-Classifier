@@ -5,7 +5,6 @@ UploadCommand::UploadCommand() {
 }
 
 void UploadCommand::execute() {
-    // If the classifier hasn't been initialized yet
     if (!m_classifierData->classifier().isInit()) {
         // Greet the user
         m_dio->write("Please upload your local train CSV file.");
