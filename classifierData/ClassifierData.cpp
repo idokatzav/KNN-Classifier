@@ -1,7 +1,7 @@
 #include "ClassifierData.h"
 
-ClassifierData::ClassifierData(std::unique_ptr<Classifier> classifier) {
-    m_classifier = std::move(classifier);
+ClassifierData::ClassifierData() {
+    m_classifier = std::unique_ptr<Classifier>(new Classifier());
 }
 
 Classifier& ClassifierData::classifier() const {

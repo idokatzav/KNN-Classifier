@@ -14,35 +14,35 @@ private:
 
 public:
     /**
-     * empty constructor.
+     * Constructor.
      */
     Classified();
 
     /**
-     * constructor.
+     * Constructor.
      * @param handle the classification of the object
      * @param data the data
      */
     Classified(std::string handle, std::vector<double>& data);
 
     /**
-    * copy constructor.
+    * Copy constructor.
     * @param classified another classified instance
     */
     Classified(const Classified& classified);
 
     /**
-     * handle getter.
+     * Handle getter.
      */
     const std::string& handle() const;
 
     /**
-     * data getter.
+     * Data getter.
      */
     const std::vector<double>& data() const;
 
     /**
-     * handle setter
+     * Handle setter
      */
     void handle(std::string handle);
 

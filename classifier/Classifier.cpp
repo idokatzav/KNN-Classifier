@@ -1,5 +1,5 @@
-#include "Classifier.h"
 #include "distance/EuclideanDistance.h"
+#include "Classifier.h"
 #include "Algorithms.h"
 #include <fstream>
 #include <sstream>

@@ -13,6 +13,6 @@ double ChebyshevDistance::distance(const std::vector<double>& v1, const std::vec
     return max;
 }
 
-std::string ChebyshevDistance::name() {
+std::string ChebyshevDistance::name() const {
     return "CHE";
 }

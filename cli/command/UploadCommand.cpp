@@ -6,19 +6,15 @@ UploadCommand::UploadCommand(DefaultIO *dio, ClassifierData *classifierData) : C
 
 void UploadCommand::execute() {
     if (!m_classifierData->classifier().isInit()) {
-        // Greet the user
         m_dio->write("Please upload your local train CSV file.");
 
-        // Receive the classified data from the client
         std::string classifiedData = m_dio->read();
 
         // Initialize the classifier
         m_classifierData->classifier().init(classifiedData);
     } else {
-        // Greet the user
         m_dio->write("Please upload your local test CSV file.");
 
-        // Receive the unclassified data from the client
         std::string unclassifiedData = m_dio->read();
 
         // Save the data
