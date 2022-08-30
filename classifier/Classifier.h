@@ -1,11 +1,14 @@
 #ifndef CLASSIFIER_H
 #define CLASSIFIER_H
 
-#include "Classified.h"
 #include "distance/Distance.h"
+#include "Classified.h"
 #include <string>
 #include <memory>
 
+/**
+ * This class represents a classifier, possible of classifying points in a dataset.
+ */
 class Classifier {
 private:
     int m_k;
@@ -31,25 +34,25 @@ public:
     bool isInit() const;
 
     /**
-     * k getter.
+     * K getter.
      * @return k
      */
     int k() const;
 
     /**
-     * k setter.
+     * K setter.
      * @param k the new integer to be used in the KNN algorithm
      */
     void k(int k);
 
     /**
-     * metric getter.
+     * Metric getter.
      * @return the metric used in the KNN algorithm
      */
     Distance& metric() const;
 
     /**
-     * metric setter.
+     * Metric setter.
      * @param metric the new metric to be used in the KNN algorithm
      */
     void metric(std::unique_ptr<Distance> metric);

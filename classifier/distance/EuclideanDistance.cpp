@@ -5,6 +5,6 @@ double EuclideanDistance::distance(const std::vector<double>& v1, const std::vec
     return len(v1 - v2);
 }
 
-std::string EuclideanDistance::name() {
+std::string EuclideanDistance::name() const {
     return "EUC";
 }

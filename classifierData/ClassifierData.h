@@ -15,9 +15,8 @@ private:
 public:
     /**
      * Constructor.
-     * @param classifier a classifier
      */
-    ClassifierData(std::unique_ptr<Classifier> classifier);
+    ClassifierData();
 
     /**
      * Classifier getter.
@@ -26,24 +25,24 @@ public:
     Classifier& classifier() const;
 
     /**
-     * unclassifiedData getter.
+     * UnclassifiedData getter.
      * @return the unclassified data
      */
     std::string unclassifiedData() const;
 
     /**
-     * unclassifiedData setter.
+     * UnclassifiedData setter.
      */
     void unclassifiedData(const std::string& unclassifiedData);
 
     /**
-     * classifiedData getter.
+     * ClassifiedData getter.
      * @return the classified data
      */
     std::string classifiedData() const;
 
     /**
-     * classifiedData setter.
+     * ClassifiedData setter.
      * @param classifiedData the classified data
      */
    void classifiedData(const std::string& classifiedData);

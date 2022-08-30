@@ -17,15 +17,14 @@ public:
     virtual double distance(const std::vector<double>& v1, const std::vector<double>& v2) const = 0;
 
     /**
+     * @return the name of the metric
+     */
+    virtual std::string name() const = 0;
+
+    /**
      * Destructor.
      */
      virtual ~Distance() = default;
-
-     /**
-      * get a string of the name of the metric.
-      * @return string form of the metric
-      */
-     virtual std::string name() = 0;
 };
 
 #endif

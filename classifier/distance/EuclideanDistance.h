@@ -3,6 +3,9 @@
 
 #include "Distance.h"
 
+/**
+ * This class represents the Euclidean metric.
+ */
 class EuclideanDistance : public Distance {
 public:
     /**
@@ -13,10 +16,9 @@ public:
     double distance(const std::vector<double>& v1, const std::vector<double>& v2) const override;
 
     /**
-      * get a string of the name of the metric.
-      * @return string form of the metric
-      */
-    std::string name() override;
+     * @return the name of the metric
+     */
+    std::string name() const override;
 };
 
 #endif

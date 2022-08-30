@@ -13,6 +13,6 @@ double ManhattanDistance::distance(const std::vector<double>& v1, const std::vec
     return res;
 }
 
-std::string ManhattanDistance::name() {
+std::string ManhattanDistance::name() const {
     return "MAN";
 }

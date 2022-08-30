@@ -1,6 +1,11 @@
 #ifndef KNN_CLASSIFIER_DISPLAYRESULTSCOMMAND_H
 #define KNN_CLASSIFIER_DISPLAYRESULTSCOMMAND_H
+
 #include "Command.h"
+
+/**
+ * This class represents the display results command - that displays the classifications it made.
+ */
 class DisplayResultsCommand : Command {
 public:
     /**
@@ -9,8 +14,9 @@ public:
      * @param classifierData classifierData Object
      */
     DisplayResultsCommand(DefaultIO* dio, ClassifierData* classifierData);
+
     /**
-     * Execute command
+     * Execute command.
      */
     void execute() override;
 };

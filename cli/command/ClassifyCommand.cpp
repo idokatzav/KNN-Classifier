@@ -6,12 +6,12 @@ ClassifyCommand::ClassifyCommand(DefaultIO *dio, ClassifierData *classifierData)
 
 void ClassifyCommand::execute() {
     if (!m_classifierData->classifier().isInit()) {
-        m_dio->write("No train file was uploaded");
+        m_dio->write("No train file was uploaded\n");
         return;
     }
 
     if (m_classifierData->unclassifiedData().empty()) {
-        m_dio->write("No test file was uploaded");
+        m_dio->write("No test file was uploaded\n");
         return;
     }
 
@@ -20,5 +20,5 @@ void ClassifyCommand::execute() {
     m_classifierData->classifiedData(res);
 
     // Inform the user the classification is done
-    m_dio->write("Classifying data complete.")
+    m_dio->write("Classifying data complete.\n");
 }
