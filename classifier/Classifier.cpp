@@ -90,3 +90,7 @@ std::string Classifier::classify(const std::string& unclassifiedData) const {
 
     return res;
 }
+
+std::vector<std::unique_ptr<Classified>>& Classifier::ClassifiedDataVector() {
+    return m_classifiedData;
+}

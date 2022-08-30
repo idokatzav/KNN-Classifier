@@ -70,6 +70,12 @@ public:
      * @return a string in a csv format with the classified data
      */
     std::string classify(const std::string& unclassifiedData) const;
+
+    /**
+     * getter for the vector of the classified data
+     * @return a reference to the classified data
+     */
+    std::vector<std::unique_ptr<Classified>>& ClassifiedDataVector();
 };
 
 #endif
