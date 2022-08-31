@@ -75,7 +75,7 @@ public:
     std::string classify(const std::string& unclassifiedData) const;
 
     /**
-     * getter for the vector of the classified data
+     * Classified data getter.
      * @return a reference to the classified data
      */
     std::vector<std::unique_ptr<Classified>>& ClassifiedDataVector();

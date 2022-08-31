@@ -96,7 +96,7 @@ class Classifier {
 private:
     int m_k;
     bool m_isInit;
-    std::vector<std::unique_ptr<Classified>> m_classifiedData;
+    std::vector<std::unique_ptr<Classified>> m_classifiedResult;
 
 public:
     void init(const std::string& dataPath);

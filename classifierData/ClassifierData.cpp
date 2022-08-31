@@ -9,17 +9,17 @@ Classifier& ClassifierData::classifier() const {
 }
 
 std::string ClassifierData::unclassifiedData() const {
-    return m_unclassifiedData;
+    return m_uploadedData;
 }
 
 void ClassifierData::unclassifiedData(const std::string& unclassifiedData) {
-    m_unclassifiedData = unclassifiedData;
+    m_uploadedData = unclassifiedData;
 }
 
 std::string ClassifierData::classifiedData() const {
-    return m_classifiedData;
+    return m_classifiedResult;
 }
 
 void ClassifierData::classifiedData(const std::string& classifiedData) {
-    m_classifiedData = classifiedData;
+    m_classifiedResult = classifiedData;
 }

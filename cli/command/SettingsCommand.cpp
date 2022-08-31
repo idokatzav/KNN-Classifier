@@ -1,4 +1,8 @@
 #include "SettingsCommand.h"
+#include "../../classifier/distance/EuclideanDistance.h"
+#include "../../classifier/distance/ManhattanDistance.h"
+#include "../../classifier/distance/ChebyshevDistance.h"
+#include "../../classifier/Algorithms.h"
 
 SettingsCommand::SettingsCommand(DefaultIO* dio, ClassifierData* classifierData) : Command(dio, classifierData) {
     m_description = "algorithm settings";

@@ -34,6 +34,7 @@ set(CLASSIFIER_DATA
 
 set(COMMANDS
         "cli/command/Command.h"
+        "cli/command/Command.cpp"
         "cli/command/ClassifyCommand.h"
         "cli/command/ClassifyCommand.cpp"
         "cli/command/DisplayConfusionMatrixCommand.h"

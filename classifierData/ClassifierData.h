@@ -10,8 +10,8 @@
 class ClassifierData {
 private:
     std::unique_ptr<Classifier> m_classifier;
-    std::string m_unclassifiedData;
-    std::string m_classifiedData;
+    std::string m_uploadedData;
+    std::string m_classifiedResult;
 public:
     /**
      * Constructor.

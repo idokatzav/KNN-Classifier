@@ -1,11 +1,8 @@
 #ifndef KNN_CLASSIFIER_COMMAND_H
 #define KNN_CLASSIFIER_COMMAND_H
 
-#include "../../classifier/Classifier.h"
 #include "../../classifierData/ClassifierData.h"
 #include "../io/DefaultIO.h"
-#include <string>
-#include <memory>
 
 /**
  * This class represents an abstract command.

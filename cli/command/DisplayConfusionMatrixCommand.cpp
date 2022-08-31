@@ -1,12 +1,20 @@
 #include "DisplayConfusionMatrixCommand.h"
-DisplayConfusionMatrixCommand::DisplayConfusionMatrixCommand(DefaultIO *dio, ClassifierData *classifierData) : Command(dio, classifierData) {
+
+DisplayConfusionMatrixCommand::DisplayConfusionMatrixCommand(DefaultIO *dio, ClassifierData *classifierData) :
+    Command(dio, classifierData) {
     m_description = "display algorithm confusion matrix";
 }
 
 void DisplayConfusionMatrixCommand::execute() {
+    if (m_classifierData->classifiedData().empty()) {
+        m_dio->write("No classification was done\n");
+        return;
+    }
+
     std::vector<std::string> trainResults;
     std::vector<std::unique_ptr<Classified>>& classified = m_classifierData->classifier().ClassifiedDataVector();
     auto len = classified.size();
+
     for (int i = 0; i < len; ++i) {
         std::string str = "";
         std::vector<double> vec;
