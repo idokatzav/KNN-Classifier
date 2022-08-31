@@ -6,7 +6,9 @@ DisplayConfusionMatrixCommand::DisplayConfusionMatrixCommand(DefaultIO *dio, Cla
 }
 
 void DisplayConfusionMatrixCommand::execute() {
-    if (m_classifierData->classifiedData().empty()) {
+    // TODO: add confusion matrix function in classifier
+
+    /*if (m_classifierData->classifiedResult().empty()) {
         m_dio->write("No classification was done\n");
         return;
     }
@@ -26,6 +28,5 @@ void DisplayConfusionMatrixCommand::execute() {
         Classified toClassifiy(str, vec);
         m_classifierData->classifier().classify(toClassifiy);
         trainResults.push_back(toClassifiy.handle());
-    }
-    //TODO: comapare the values for the algorithm to the real
+    }*/
 }

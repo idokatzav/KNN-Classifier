@@ -5,6 +5,7 @@
 #include "Classified.h"
 #include <string>
 #include <memory>
+#include <map>
 
 /**
  * This class represents a classifier, possible of classifying points in a dataset.
@@ -15,6 +16,7 @@ private:
     bool m_isInit;
     std::unique_ptr<Distance> m_metric;
     std::vector<std::unique_ptr<Classified>> m_classifiedData;
+    std::unique_ptr<std::map<std::string, int>> m_handles;
 
 public:
     /**
@@ -74,11 +76,6 @@ public:
      */
     std::string classify(const std::string& unclassifiedData) const;
 
-    /**
-     * Classified data getter.
-     * @return a reference to the classified data
-     */
-    std::vector<std::unique_ptr<Classified>>& ClassifiedDataVector();
 };
 
 #endif

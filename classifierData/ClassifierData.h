@@ -9,9 +9,10 @@
  */
 class ClassifierData {
 private:
-    std::unique_ptr<Classifier> m_classifier;
+    Classifier* m_classifier;
     std::string m_uploadedData;
     std::string m_classifiedResult;
+
 public:
     /**
      * Constructor.
@@ -25,27 +26,32 @@ public:
     Classifier& classifier() const;
 
     /**
-     * UnclassifiedData getter.
-     * @return the unclassified data
+     * UploadedData getter.
+     * @return the uploaded data
      */
-    std::string unclassifiedData() const;
+    std::string uploadedData() const;
 
     /**
-     * UnclassifiedData setter.
+     * UploadedData setter.
      */
-    void unclassifiedData(const std::string& unclassifiedData);
+    void uploadData(const std::string& uploadedData);
 
     /**
      * ClassifiedData getter.
      * @return the classified data
      */
-    std::string classifiedData() const;
+    std::string classifiedResult() const;
 
     /**
-     * ClassifiedData setter.
-     * @param classifiedData the classified data
+     * ClassifiedResult setter.
+     * @param classifiedData the classified result
      */
-   void classifiedData(const std::string& classifiedData);
+   void uploadResult(const std::string& classifiedResult);
+
+   /**
+    * Destructor.
+    */
+   ~ClassifierData();
 };
 
 #endif

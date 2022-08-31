@@ -10,14 +10,14 @@ void ClassifyCommand::execute() {
         return;
     }
 
-    if (m_classifierData->unclassifiedData().empty()) {
+    if (m_classifierData->uploadedData().empty()) {
         m_dio->write("No test file was uploaded\n");
         return;
     }
 
     // Classify the data
-    std::string res = m_classifierData->classifier().classify(m_classifierData->unclassifiedData());
-    m_classifierData->classifiedData(res);
+    std::string res = m_classifierData->classifier().classify(m_classifierData->uploadedData());
+    m_classifierData->uploadResult(res);
 
     // Inform the user the classification is done
     m_dio->write("Classifying data complete.\n");

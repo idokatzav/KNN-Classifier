@@ -80,7 +80,7 @@ need of representing a point in a dataset, this class was born.
 class Classified {
 private:
     std::vector<double> m_data;
-    std::string m_handle;
+    std::string m_handles;
 public:
     //...
     static std::unique_ptr<Classified> fromLine(const std::string& line);
@@ -103,7 +103,7 @@ public:
     
     void classify(Classified& unclassified, const Distance& metric) const;
 
-    std::string classify(const std::string& unclassifiedData, const Distance& metric) const;
+    std::string classify(const std::string& uploadedData, const Distance& metric) const;
 };
 ```
 ### The Client And The Server

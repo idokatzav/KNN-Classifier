@@ -12,12 +12,12 @@ private:
 
 public:
     /**
-     * constructor.
+     * Constructor.
      */
     Cli(DefaultIO* dio, std::vector<Command*>& commands);
 
     /**
-     * start the cli.
+     * Start the cli.
      */
     void start();
 };

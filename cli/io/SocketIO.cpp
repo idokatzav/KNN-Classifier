@@ -7,7 +7,7 @@ SocketIO::SocketIO(Socket& socket, int sockfd) {
 
 std::string SocketIO::read() {
     char buf[512];
-    m_socket.recv(buf, 512, m_sockfd);
+    Socket::recv(buf, 512, m_sockfd);
     return buf;
 }
 

@@ -8,15 +8,29 @@ Classifier::Classifier() : m_isInit(false) {
     // Initialize the classified with default values
     m_k = 5;
     m_metric =  std::unique_ptr<Distance>(new EuclideanDistance());
+    m_handles = std::unique_ptr<std::map<std::string, int>>(new std::map<std::string, int>);
 }
 
 void Classifier::init(const std::string& classifiedData) {
+    if (m_isInit) {
+        throw std::runtime_error("Classifier already initialized");
+    }
+
     std::istringstream f(classifiedData);
     std::string line;
 
     // Iterate through the csv file, and gather the classified objects' data and classifications
     while (std::getline(f, line)) {
-        m_classifiedData.push_back(Classified::fromLine(line));
+        std::unique_ptr<Classified> classified = Classified::fromLine(line);
+        std::string handle = classified->handle();
+
+        if (m_handles->count(handle)) {
+            m_handles->at(handle)++;
+        } else {
+            m_handles->operator[](handle) = 1;
+        }
+
+        m_classifiedData.push_back(std::move(classified));
     }
 
     m_isInit = true;
@@ -60,7 +74,7 @@ void Classifier::classify(Classified& unclassified) const {
         }
     }
 
-    // Find the K nearest neighbours, and the most common handle among them
+    // Find the K nearest neighbours, and the most common handles among them
     std::map<std::string, int> map;
     std::vector<int> indices = kSmallestElements(distances, m_k);
 
@@ -74,7 +88,7 @@ void Classifier::classify(Classified& unclassified) const {
         }
     }
 
-    // Give the unclassified object the correct handle
+    // Give the unclassified object the correct handles
     unclassified.handle(maxKey(map));
 }
 
@@ -89,8 +103,4 @@ std::string Classifier::classify(const std::string& unclassifiedData) const {
     }
 
     return res;
-}
-
-std::vector<std::unique_ptr<Classified>>& Classifier::ClassifiedDataVector() {
-    return m_classifiedData;
 }

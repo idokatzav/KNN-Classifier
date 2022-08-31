@@ -1,7 +1,8 @@
 #ifndef KNN_CLASSIFIER_DISPLAYCONFUSIONMATRIXCOMMAND_H
 #define KNN_CLASSIFIER_DISPLAYCONFUSIONMATRIXCOMMAND_H
+
 #include "Command.h"
-#include <map>
+
 class DisplayConfusionMatrixCommand : Command {
 public:
     /**
@@ -10,6 +11,7 @@ public:
      * @param classifierData classifierData Object
      */
     DisplayConfusionMatrixCommand(DefaultIO* dio, ClassifierData* classifierData);
+
     /**
      * Execute command
      */
