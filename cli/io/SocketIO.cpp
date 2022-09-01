@@ -8,7 +8,7 @@ std::string SocketIO::read() {
     return buf;
 }
 
-void SocketIO::write(std::string str) {
+void SocketIO::write(const std::string &str) {
     m_socket.send(str);
 }
 

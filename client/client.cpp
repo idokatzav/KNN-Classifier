@@ -1,39 +1,48 @@
 #include "../socket/Socket.h"
-#include <memory>
 #include <iostream>
+#include <memory>
 #include <fstream>
+#include <string.h>
 
 int main(int argc, char* argv[]) {
-    if (argc < 2) {
-        std::cout << "Usage: ./Client [unclassified-data-path] [output-path]" << std::endl;
-        return 1;
-    }
-
     // Server constants
     const char* ip_address = "127.0.0.1";
     const int port_no = 5555;
 
-    // Create a socket and connect to the serever
+    // Create a socket and connect to the server
     std::unique_ptr<Socket> socket(new Socket);
     socket->connect(ip_address, port_no);
 
-    // Gather the unclassified data, and send it to the server
-    std::string line, fileContent;
-    std::ifstream inFile(argv[1]);
+    while (true) {
+        char buf[512];
+        socket->recv(buf, 512);
 
-    while (std::getline(inFile, line)) { fileContent += line + '\n'; }
+        if (strcmp(buf, "exit") != 0) {
+            break;
+        }
 
-    inFile.close();
-    socket->send(fileContent, socket->sockFd());
+        // TODO: download command
 
-    // Receive the classifications from the server, and write them to the desired path
-    char buffer[512] = {0};
-    socket->recv(buffer, 512, socket->sockFd());
+        std::string response;
+        getline(std::cin, response);
 
-    std::ofstream ostream(argv[2]);
-    ostream << buffer;
+        // Check if the input is a file path
+        std::ifstream inFile(response);
+
+        if (inFile) {
+            response.clear();
+            std::string line;
+
+            while (getline(inFile, line)) {
+                response += line;
+            }
+
+            inFile.close();
+        }
+
+        socket->send(response);
+    }
 
     // Finish the program
     socket->close();
-    return 0;
 }

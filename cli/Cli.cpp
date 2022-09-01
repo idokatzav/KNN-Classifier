@@ -11,9 +11,8 @@ Cli::Cli(DefaultIO* dio) : m_dio(dio) {
     m_classifierData = new ClassifierData();
 
     m_commands = {new UploadCommand(m_dio, m_classifierData), new SettingsCommand(m_dio, m_classifierData),
-                  new SettingsCommand(m_dio, m_classifierData), new ClassifyCommand(m_dio, m_classifierData),
-                  new DisplayResultsCommand(m_dio, m_classifierData), /*new DownloadResultsCommand(m_dio, m_classifierData),*/
-                  /*new DisplayConfusionMatrixCommand(m_dio, m_classifierData)*/};
+                  new ClassifyCommand(m_dio, m_classifierData), new DisplayResultsCommand(m_dio, m_classifierData),
+                  /*new DownloadResultsCommand(m_dio, m_classifierData), new DisplayConfusionMatrixCommand(m_dio, m_classifierData)*/};
 }
 
 void Cli::start() {
@@ -22,10 +21,10 @@ void Cli::start() {
     int size = m_commands.size();
 
     for (int i = 0; i < size; ++i) {
-        menu += std::to_string(i + 1) + ". " + m_commands[i]->description();
+        menu += std::to_string(i + 1) + ". " + m_commands[i]->description() + "\n";
     }
 
-    menu += std::to_string(size) + ". exit\n";
+    menu += std::to_string(size + 1) + ". exit\n";
 
     while(true) {
         m_dio->write(menu);
@@ -36,20 +35,21 @@ void Cli::start() {
         try {
             index = std::stoi(m_dio->read());
         } catch (const std::exception& e) {
-            m_dio->write("Please enter a number");
+            m_dio->write("Please enter a number\n");
             continue;
         }
 
-        if (index <= 0 || index > size) {
-            m_dio->write("Invalid command");
-            continue;
-        }
-
-        if (index == size) {
+        if (index == size + 1) {
+            m_dio->write("exit\n");
             break;
         }
 
-        m_commands[index]->execute();
+        if (index <= 0 || index > size) {
+            m_dio->write("Invalid command\n");
+            continue;
+        }
+
+        m_commands[index - 1]->execute();
     }
 }
 

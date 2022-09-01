@@ -13,7 +13,7 @@ public:
 
     std::string read() override;
 
-    void write(std::string str) override;
+    void write(const std::string &str) override;
 };
 
 #endif

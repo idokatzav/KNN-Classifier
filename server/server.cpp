@@ -1,11 +1,10 @@
 #include "../socket/Socket.h"
 #include "../cli/Cli.h"
-#include "../cli/io/DefaultIO.h"
 #include "../cli/io/StandardIO.h"
 #include <memory>
 
 int main() {
-    /*// Server Constants
+    // Server Constants
     const int server_port = 5555;
     const int k = 5;
 
@@ -23,17 +22,16 @@ int main() {
         // In case of a timeout
         if (client_sock == -1) {
             break;
-        }*/
+        }
 
         // Handle the client
         std::unique_ptr<DefaultIO> dio(new StandardIO());
         std::unique_ptr<Cli> cli(new Cli(&(*dio)));
-
         cli->start();
-    /*}
+    }
 
     // Finish the program
-    socket->close();*/
+    socket->close();
 
     return 0;
 }

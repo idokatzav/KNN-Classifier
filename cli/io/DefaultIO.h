@@ -18,7 +18,7 @@ public:
      * Writes the given output.
      * @param str the output
      */
-    virtual void write(std::string str) = 0;
+    virtual void write(const std::string &str) = 0;
 
     /**
      * Destructor.
