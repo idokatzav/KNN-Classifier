@@ -6,7 +6,7 @@
 /**
  * This class represents the display results command - that displays the classifications it made.
  */
-class DisplayResultsCommand : Command {
+class DisplayResultsCommand : public Command {
 public:
     /**
      * Constructor

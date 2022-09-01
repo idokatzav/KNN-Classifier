@@ -6,7 +6,7 @@
 /**
  * This class represents the classify command - that classifies the data it holds.
  */
-class ClassifyCommand : Command {
+class ClassifyCommand : public Command {
 public:
     /**
      * Constructor.

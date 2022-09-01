@@ -50,17 +50,15 @@ public:
      /**
       * Send a message on a socket.
       * @param message the message to be sent
-      * @param socket a socket descriptor
       */
-    void send(const std::string& message, int socket) const;
+    void send(const std::string& message) const;
 
      /**
       * Receive a message from a socket.
       * @param buf the buffer the received message will be written to
       * @param size the size of the buffer
-      * @param socket a socket descriptor
       */
-    static void recv(char* buf, int size, int socket) ;
+    void recv(char* buf, int size) ;
 
     /**
      * Close the socket.

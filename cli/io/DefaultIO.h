@@ -13,11 +13,17 @@ public:
      * @return the input
      */
     virtual std::string read() = 0;
+
     /**
      * Writes the given output.
      * @param str the output
      */
     virtual void write(std::string str) = 0;
+
+    /**
+     * Destructor.
+     */
+     virtual ~DefaultIO() = default;
 };
 
 #endif

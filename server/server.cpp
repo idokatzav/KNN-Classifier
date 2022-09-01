@@ -1,36 +1,39 @@
-#include "../classifier/Classifier.h"
-#include "../classifier/distance/EuclideanDistance.h"
 #include "../socket/Socket.h"
+#include "../cli/Cli.h"
+#include "../cli/io/DefaultIO.h"
+#include "../cli/io/StandardIO.h"
 #include <memory>
 
 int main() {
-    // Server Constants
+    /*// Server Constants
     const int server_port = 5555;
     const int k = 5;
 
     // Create a socket, and bind a name to it
-    std::unique_ptr<Socket> socket(new Socket);
+    std::unique_ptr<Socket> socket(new Socket());
     socket->bind(server_port);
 
-    // Listen for a connection, and accept it
+    // Listen for connections
     socket->listen();
-    int client_sock = socket->accept();
 
-    // Receive the unclassified data
-    char buffer[512] = {0};
-    socket->recv(buffer, 512, client_sock);
+    while (true) {
+        // Accept a connection
+        int client_sock = socket->accept();
 
-    // Create a classifier
-//    std::unique_ptr<Classifier> classifier(new Classifier(k));
-//    classifier->init("../server/Data/Classified.csv");
+        // In case of a timeout
+        if (client_sock == -1) {
+            break;
+        }*/
 
-    // Classify the data, and send the classifications to the client
-//    std::unique_ptr<Distance> metric(new EuclideanDistance());
-//    std::string res = classifier->classify(buffer, *metric);
+        // Handle the client
+        std::unique_ptr<DefaultIO> dio(new StandardIO());
+        std::unique_ptr<Cli> cli(new Cli(&(*dio)));
 
-//    socket->send(res, client_sock);
+        cli->start();
+    /*}
 
     // Finish the program
-    socket->close();
+    socket->close();*/
+
     return 0;
 }

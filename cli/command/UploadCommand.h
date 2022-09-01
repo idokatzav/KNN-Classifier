@@ -6,7 +6,7 @@
 /**
  * This class represents the uploadData command - that initializes the unclassified, and classified data.
  */
-class UploadCommand : Command {
+class UploadCommand : public Command {
 public:
     /**
      * Constructor.

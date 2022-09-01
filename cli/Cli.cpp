@@ -1,6 +1,20 @@
 #include "Cli.h"
+#include "command/UploadCommand.h"
+#include "command/SettingsCommand.h"
+#include "command/ClassifyCommand.h"
+#include "command/DisplayResultsCommand.h"
+#include "command/DownloadResultsCommand.h"
+#include "command/DisplayConfusionMatrixCommand.h"
 
-Cli::Cli(DefaultIO* dio, std::vector<Command*>& commands) : m_dio(dio), m_commands(commands) {}
+
+Cli::Cli(DefaultIO* dio) : m_dio(dio) {
+    m_classifierData = new ClassifierData();
+
+    m_commands = {new UploadCommand(m_dio, m_classifierData), new SettingsCommand(m_dio, m_classifierData),
+                  new SettingsCommand(m_dio, m_classifierData), new ClassifyCommand(m_dio, m_classifierData),
+                  new DisplayResultsCommand(m_dio, m_classifierData), /*new DownloadResultsCommand(m_dio, m_classifierData),*/
+                  /*new DisplayConfusionMatrixCommand(m_dio, m_classifierData)*/};
+}
 
 void Cli::start() {
     // Print the menu
@@ -36,5 +50,13 @@ void Cli::start() {
         }
 
         m_commands[index]->execute();
+    }
+}
+
+Cli::~Cli() {
+    delete m_classifierData;
+
+    for (int i = 0; i < m_commands.size(); ++i) {
+        delete m_commands[i];
     }
 }

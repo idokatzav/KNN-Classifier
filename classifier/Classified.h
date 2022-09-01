@@ -1,5 +1,6 @@
 #ifndef Classified_H
 #define Classified_H
+
 #include <vector>
 #include <string>
 #include <memory>

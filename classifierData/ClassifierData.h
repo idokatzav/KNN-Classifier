@@ -2,7 +2,6 @@
 #define KNN_CLASSIFIER_CLASSIFIERDATA_H
 
 #include "../classifier/Classifier.h"
-#include <memory>
 
 /**
  * This class holds all the information needed by the server when communicating with the client.

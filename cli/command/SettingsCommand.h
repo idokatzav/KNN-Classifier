@@ -6,7 +6,7 @@
 /**
  * This class represents the settings command - that changes the classifier's parameters.
  */
-class SettingsCommand : Command {
+class SettingsCommand : public Command {
 private:
     /**
      * @param str a string representing the K value form the classifier

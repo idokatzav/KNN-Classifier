@@ -3,7 +3,7 @@
 
 #include "Command.h"
 
-class DisplayConfusionMatrixCommand : Command {
+class DisplayConfusionMatrixCommand : public Command {
 public:
     /**
      * Constructor

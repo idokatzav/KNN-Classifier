@@ -50,6 +50,7 @@ void Socket::connect(const char *cp, int port) const {
 }
 
 void Socket::listen() const {
+    // Listen for a connection, with a queue length of 5
     if (::listen(m_sockfd, 5) < 0) {
         perror("Error listening for a connection");
     }
@@ -67,24 +68,24 @@ int Socket::accept() const {
     return client_sock;
 }
 
-void Socket::send(const std::string& message, int socket) const {
+void Socket::send(const std::string& message) const {
     if (message.size() > BUFFER_LIM) {
         fprintf(stderr,"Buffer size too big, %d is the character limit", BUFFER_LIM);
     }
 
-    int sent_bytes = ::send(socket, message.c_str(), message.size(), 0);
+    int sent_bytes = ::send(m_sockfd, message.c_str(), message.size(), 0);
 
     if (sent_bytes < 0) {
         perror("Error sending data");
     }
 }
 
-void Socket::recv(char* buf, int size, int socket) {
+void Socket::recv(char* buf, int size) {
     if (size < BUFFER_LIM) {
         fprintf(stderr,"Buffer size must be at least %d", BUFFER_LIM);
     }
 
-    int read_bytes = ::recv(socket, buf, size, 0);
+    int read_bytes = ::recv(m_sockfd, buf, size, 0);
 
     if (read_bytes <= 0) {
         perror("Error receiving data");

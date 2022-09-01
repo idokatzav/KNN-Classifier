@@ -6,11 +6,10 @@
 
 class SocketIO : public DefaultIO {
 private:
-    Socket m_socket;
-    int m_sockfd;
+    Socket& m_socket;
 
 public:
-    SocketIO(Socket& socket, int sockfd);
+    SocketIO(Socket& socket);
 
     std::string read() override;
 
