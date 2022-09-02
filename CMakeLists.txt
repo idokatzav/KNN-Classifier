@@ -74,14 +74,14 @@ set(SERVER
         ${COMMANDS}
         ${IO}
         ${CLI}
-        "server/server.cpp"
+        "server/ServerMain.cpp"
 )
 
 set(CLIENT
         ${SOCKET}
         client/Client.h
         client/Client.cpp
-        "client/main.cpp"
+        "client/ClientMain.cpp"
 )
 
 add_executable(Server ${SERVER})

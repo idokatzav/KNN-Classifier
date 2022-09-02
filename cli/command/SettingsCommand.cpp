@@ -21,7 +21,8 @@ int SettingsCommand::isValidK(const std::string& str) {
 }
 
 void SettingsCommand::execute() {
-    m_dio->write(std::string("The current KNN parameters are:")
+    // Notify the client it needs to get input from the user, as well as greet the user
+    m_dio->write(std::string("\\InputThe current KNN parameters are:")
                 + std::string(" K = ") + std::to_string(m_classifierData->classifier().k())
                 + ", distance metric = " + m_classifierData->classifier().metric().name() + "\n");
 

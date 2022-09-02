@@ -10,6 +10,7 @@ private:
     char* m_ip_address;
     const std::string m_uploadIndicator = "\\Upload";
     const std::string m_downloadIndicator = "\\Download";
+    const std::string m_inputIndicator = "\\Input";
     std::unique_ptr<ClientSocket> m_socket;
     std::string m_message;
 

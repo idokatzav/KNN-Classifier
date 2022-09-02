@@ -5,6 +5,7 @@
 #include <arpa/inet.h>
 #include <cstring>
 #include <cstdio>
+#include <algorithm>
 
 void ClientSocket::connect(const char *cp, int port) const {
     struct sockaddr_in sin{};
@@ -37,7 +38,7 @@ void ClientSocket::send(std::string message) const {
 
 std::string ClientSocket::recv() {
     std::string response;
-    char buf[4096];
+    char buf[4096] = {0};
     int size = 4096;
 
     do {
@@ -48,8 +49,10 @@ std::string ClientSocket::recv() {
         }
 
         response += buf;
+
     } while (response[response.length() - 1] != '\003');
 
-    response.pop_back();
+    // Remove all occurrences of the End Of Text character
+    response.erase(std::remove(response.begin(), response.end(), '\003'), response.end());
     return response;
 }

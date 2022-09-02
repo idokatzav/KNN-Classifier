@@ -17,7 +17,7 @@ Cli::Cli(DefaultIO* dio) : m_dio(dio) {
 
 void Cli::start() {
     // Print the menu
-    std::string menu = "Welcome to the KNN Classifier Server. Please choose an option:\n";
+    std::string menu = "\\InputWelcome to the KNN Classifier Server. Please choose an option:\n";
     int size = m_commands.size();
 
     for (int i = 0; i < size; ++i) {
@@ -35,7 +35,7 @@ void Cli::start() {
         try {
              index = std::stoi(m_dio->read());
         } catch (const std::exception& e) {
-            m_dio->write("Please enter a number\n");
+            m_dio->write("\\InputPlease enter a number\n");
             continue;
         }
 
@@ -45,7 +45,7 @@ void Cli::start() {
         }
 
         if (index <= 0 || index > size) {
-            m_dio->write("Invalid command\n");
+            m_dio->write("\\InputInvalid command\n");
             continue;
         }
 

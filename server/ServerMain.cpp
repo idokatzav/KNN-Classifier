@@ -8,7 +8,7 @@ int main() {
     const int server_port = 5555;
     const int k = 5;
 
-    // Create a m_socket, and bind a name to it
+    // Create a socket, and bind a name to it
     std::unique_ptr<ServerSocket> socket(new ServerSocket());
     socket->bind(server_port);
 

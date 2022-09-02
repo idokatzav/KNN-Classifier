@@ -13,7 +13,7 @@ std::string Client::userInput() {
 }
 
 void Client::upload() {
-    m_message.erase(0, m_uploadIndicator.length());
+    m_message.erase(m_message.find(m_uploadIndicator), m_uploadIndicator.length());
 
     std::cout << m_message;
 
@@ -25,11 +25,10 @@ void Client::upload() {
     }
 
     m_socket->send(response);
-    std::cout << m_socket->recv();
 }
 
 void Client::download() {
-    m_message.erase(0, m_downloadIndicator.length());
+    m_message.erase(m_message.find(m_downloadIndicator), m_downloadIndicator.length());
 
     std::string resultPath = userInput();
 
@@ -40,9 +39,19 @@ void Client::download() {
 }
 
 void Client::general() {
+    bool shouldGetInput = false;
+
+    if (m_message.find(m_inputIndicator) < std::string::npos) {
+        m_message.erase(m_message.find(m_inputIndicator), m_inputIndicator.length());
+        shouldGetInput = true;
+    }
+
     std::cout << m_message;
-    std::string response = userInput();
-    m_socket->send(response);
+
+    if (shouldGetInput) {
+        std::string response = userInput();
+        m_socket->send(response);
+    }
 }
 
 void Client::communicate() {
@@ -51,7 +60,7 @@ void Client::communicate() {
     while (true) {
         m_message = m_socket->recv();
 
-        if (m_message == "exit") {
+        if (m_message == "exit\n") {
             break;
         }
 

@@ -3,6 +3,8 @@
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <cstring>
+#include <algorithm>
+
 
 void ServerSocket::bind(int port) const {
     // Bind the socket
@@ -58,7 +60,7 @@ void ServerSocket::send(std::string message) const {
 
 std::string ServerSocket::recv() {
     std::string response;
-    char buf[4096];
+    char buf[4096] = {0};
     int size = 4096;
 
     do {
@@ -72,6 +74,7 @@ std::string ServerSocket::recv() {
 
     } while (response[response.length() - 1] != '\003');
 
-    response.pop_back();
+    // Remove all occurrences of the End Of Text character
+    response.erase(std::remove(response.begin(), response.end(), '\003'), response.end());
     return response;
 }
