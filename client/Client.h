@@ -8,6 +8,7 @@ class Client {
 private:
     int m_port_no;
     char* m_ip_address;
+    const std::string m_endOfDownloadIndicator = "\\End";
     const std::string m_uploadIndicator = "\\Upload";
     const std::string m_downloadIndicator = "\\Download";
     const std::string m_inputIndicator = "\\Input";
