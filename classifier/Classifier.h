@@ -6,6 +6,7 @@
 #include <string>
 #include <memory>
 #include <map>
+#include <cmath>
 
 /**
  * This class represents a classifier, possible of classifying points in a dataset.
@@ -66,6 +67,12 @@ public:
      * @param distance a distance metric
      */
     void classify(Classified& unclassified) const;
+
+    /**
+    * creates a string contains the confusion matrix
+    * @return the string wih the information.
+    */
+    std::string confusionMatrix();
 
     /**
      * Given unclassified data in a csv format, this method uses

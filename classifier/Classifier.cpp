@@ -104,3 +104,38 @@ std::string Classifier::classify(const std::string& unclassifiedData) const {
 
     return res;
 }
+
+std::string Classifier::confusionMatrix() {
+    if (!isInit()) {
+        throw std::runtime_error("Classifier uninitialized");
+    }
+    std::string res;
+    for (std::pair<const std::string, int> cur:*(m_handles.get())) {
+        std::unique_ptr<std::map<std::string, int>> curTypeMap(new std::map<std::string,int>);
+        for (int i = 0; i < m_classifiedData.size(); ++i) {
+            if (m_classifiedData[i]->handle().compare(cur.first)) {
+                std::vector<double> vec;
+                auto vec1 = m_classifiedData[i]->data();
+                for (int j = 0; j < vec1.size(); ++j) {
+                    vec.push_back(vec1[j]);
+                }
+                Classified curClassified("", vec);
+                classify(curClassified);
+                std::string handle = curClassified.handle();
+                if (curTypeMap->count(handle)) {
+                    curTypeMap->at(handle)++;
+                } else {
+                    curTypeMap->operator[](handle) = 1;
+                }
+            }
+        }
+        auto tot = cur.second;
+        for (std::pair<const std::string, int> handleCur:*(curTypeMap.get())) {
+            res += handleCur.first + "\t";
+            double res1 = (double)handleCur.second / tot;
+            res += std::to_string(std::round(res1)) + "%\t";
+        }
+        res += "\n";
+    }
+    return res;
+}
