@@ -133,7 +133,9 @@ std::string Classifier::confusionMatrix() {
         for (std::pair<const std::string, int> handleCur:*(curTypeMap.get())) {
             res += handleCur.first + "\t";
             double res1 = (double)handleCur.second / tot;
-            res += std::to_string(std::round(res1)) + "%\t";
+            int res1Int = handleCur.second / tot;
+            int addition = (res1 - res1Int >= 0.5) ? 1 : 0;
+            res += std::to_string(res1Int + addition) + "%\t";
         }
         res += "\n";
     }
