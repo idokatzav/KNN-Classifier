@@ -3,7 +3,7 @@
 #include <fstream>
 
 Client::Client(char* ip_address, int port_num) : m_ip_address(ip_address), m_port_no(port_num) {
-    m_socket = std::unique_ptr<Socket>(new Socket());
+    m_socket = std::unique_ptr<ClientSocket>(new ClientSocket());
 }
 
 std::string Client::userInput() {

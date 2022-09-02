@@ -6,6 +6,10 @@ set(CMAKE_CXX_STANDARD 11)
 set(SOCKET
         "socket/Socket.h"
         "socket/Socket.cpp"
+        "socket/ClientSocket.h"
+        "socket/ClientSocket.cpp"
+        "socket/ServerSocket.h"
+        "socket/ServerSocket.cpp"
 )
 
 set(DISTANCE

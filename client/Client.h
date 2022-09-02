@@ -1,7 +1,7 @@
 #ifndef KNN_CLASSIFIER_CLIENT_H
 #define KNN_CLASSIFIER_CLIENT_H
 
-#include "../socket/Socket.h"
+#include "../socket/ClientSocket.h"
 #include <memory>
 
 class Client {
@@ -10,7 +10,7 @@ private:
     char* m_ip_address;
     const std::string m_uploadIndicator = "\\Upload";
     const std::string m_downloadIndicator = "\\Download";
-    std::unique_ptr<Socket> m_socket;
+    std::unique_ptr<ClientSocket> m_socket;
     std::string m_message;
 
     static std::string userInput();

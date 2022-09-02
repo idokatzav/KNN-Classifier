@@ -33,7 +33,7 @@ void Cli::start() {
         int index = -1;
 
         try {
-            index = std::stoi(m_dio->read());
+             index = std::stoi(m_dio->read());
         } catch (const std::exception& e) {
             m_dio->write("Please enter a number\n");
             continue;

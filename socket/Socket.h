@@ -7,7 +7,7 @@
  * This class represents a m_socket that communicates with others using the TCP protocol.
  */
 class Socket {
-private:
+protected:
     static const int BUFFER_LIM = 4096;
     int m_sockfd;
 
@@ -22,41 +22,16 @@ public:
      */
     int sockFd() const;
 
-    /**
-     * Bind a name to the m_socket, and adds a timeout mechanism.
-     * @param cp a string that represents the ip address
-     * @param port the desired port of the m_socket
-     */
-    void bind(int port) const;
-
-    /**
-     * Connect to a server.
-     * @param cp a string that represents the ip address of the server
-     * @param port the desired port on the server
-     */
-    void connect(const char* cp, int port) const;
-
-    /**
-     * Listen for a connection.
-     */
-    void listen() const;
-
-    /**
-     * Accept a client.
-     * @return the client's m_socket fd
-     */
-    int accept() const;
-
      /**
       * Send a message on the m_socket.
       * @param message the message to be sent
       */
-    void send(const std::string& message) const;
+    virtual void send(std::string message) const = 0;
 
      /**
       * Receive a message from the m_socket.
       */
-    std::string recv() ;
+    virtual std::string recv() = 0 ;
 
     /**
      * Close the m_socket.

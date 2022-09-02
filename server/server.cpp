@@ -1,6 +1,5 @@
-#include "../socket/Socket.h"
+#include "../socket/ServerSocket.h"
 #include "../cli/Cli.h"
-#include "../cli/io/StandardIO.h"
 #include "../cli/io/SocketIO.h"
 #include <memory>
 
@@ -10,7 +9,7 @@ int main() {
     const int k = 5;
 
     // Create a m_socket, and bind a name to it
-    std::unique_ptr<Socket> socket(new Socket());
+    std::unique_ptr<ServerSocket> socket(new ServerSocket());
     socket->bind(server_port);
 
     // Listen for connections
