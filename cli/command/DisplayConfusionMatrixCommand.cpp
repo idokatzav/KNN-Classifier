@@ -6,14 +6,13 @@ DisplayConfusionMatrixCommand::DisplayConfusionMatrixCommand(DefaultIO *dio, Cla
 }
 
 void DisplayConfusionMatrixCommand::execute() {
-    // TODO: add confusion matrix function in classifier
-
-    /*if (m_classifierData->classifiedResult().empty()) {
+    if (m_classifierData->classifiedResult().empty()) {
         m_dio->write("No classification was done\n");
         return;
     }
 
-    std::vector<std::string> trainResults;
+    // TODO: add confusion matrix function in classifier
+    /*std::vector<std::string> trainResults;
     std::vector<std::unique_ptr<Classified>>& classified = m_classifierData->classifier().ClassifiedDataVector();
     auto len = classified.size();
 

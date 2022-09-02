@@ -13,5 +13,5 @@ void DisplayResultsCommand::execute() {
 
     //TODO: display the results
 
-    m_dio->write(m_classifierData->classifiedResult() + "\nDone.");
+    m_dio->write(m_classifierData->classifiedResult() + "\nDone.\n");
 }

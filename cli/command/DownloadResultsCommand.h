@@ -6,14 +6,14 @@
 /**
  * This class represents the downloadResultsCommand command - downloads the results of the classification.
  */
-class DownloadResultCommand : public Command {
+class DownloadResultsCommand : public Command {
 public:
     /**
      * Constructor.
      * @param dio pointer to a DefaultIO object for userInput and output
      * @param classifierData classifierData Object
      */
-    DownloadResultCommand(DefaultIO* dio, ClassifierData *classifierData);
+    DownloadResultsCommand(DefaultIO* dio, ClassifierData *classifierData);
 
     /**
      * Execute the command.

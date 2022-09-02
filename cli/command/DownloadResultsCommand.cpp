@@ -1,11 +1,15 @@
 #include "DownloadResultsCommand.h"
 
-DownloadResultCommand::DownloadResultCommand(DefaultIO *dio, ClassifierData *classifierData) :
-    Command(dio, classifierData) {}
+DownloadResultsCommand::DownloadResultsCommand(DefaultIO *dio, ClassifierData *classifierData) :
+    Command(dio, classifierData) {
+    m_description = "download results";
+}
 
-void DownloadResultCommand::execute() {
+void DownloadResultsCommand::execute() {
+    // TODO: check if any classifications were done
+
     // Notify the client it needs to save the content in a file
-    m_dio->write("\\Download");
+    std::string res = "HELLO FROM THE OTHER SIDE"; // TODO
 
-    // TODO: the rest
+    m_dio->write("\\Download" + res + "\\End");
 }

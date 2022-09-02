@@ -16,6 +16,7 @@ void Client::upload() {
     m_message.erase(m_message.find(m_uploadIndicator), m_uploadIndicator.length());
 
     std::cout << m_message;
+    m_message.clear();
 
     std::string filePath = userInput(), response, line;
     std::ifstream inFile(filePath);
@@ -28,13 +29,23 @@ void Client::upload() {
 }
 
 void Client::download() {
-    m_message.erase(m_message.find(m_downloadIndicator), m_downloadIndicator.length());
+    // Extract the data to be downloaded
+    int start = m_message.find(m_downloadIndicator) + m_downloadIndicator.length();
+    int end =  m_message.find(m_endOfDownloadIndicator);
 
+    std::string result = m_message.substr(start, end - start);
+
+    // Erase it from the message
+    m_message.erase(m_message.find(m_downloadIndicator),
+                    m_downloadIndicator.length() + result.length() + m_endOfDownloadIndicator.length());
+
+    // Write into the specified file
     std::string resultPath = userInput();
 
     std::ofstream oFile;
     oFile.open(resultPath + "/results.txt");
-    oFile << m_message;
+
+    oFile << result;
     oFile.close();
 }
 
@@ -47,6 +58,7 @@ void Client::general() {
     }
 
     std::cout << m_message;
+    m_message.clear();
 
     if (shouldGetInput) {
         std::string response = userInput();
@@ -58,7 +70,9 @@ void Client::communicate() {
     m_socket->connect(m_ip_address,m_port_no);
 
     while (true) {
-        m_message = m_socket->recv();
+        if (m_message.empty()) {
+            m_message = m_socket->recv();
+        }
 
         if (m_message == "exit\n") {
             break;
