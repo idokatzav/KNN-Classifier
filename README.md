@@ -122,7 +122,7 @@ graph LR;
     Classifier-->Classify;
     Classify-->send;
 ```
-With greater details: After creating and binding a socket,
+With greater details: After creating and binding a m_socket,
 the server listens and accepts a client. When the two are connected,
 the server receives the unclassified data from the user,
 and classifies it with a classifier, initialized with local data.
@@ -134,7 +134,7 @@ the Euclidean metric.
 <br>
 <br>
 **The client:** The client's workflow is too, fairly simple.
-First, the client creates a socket and connects to the server.
+First, the client creates a m_socket and connects to the server.
 Then, client reads the unclassified data from the provided path,
 and sends it to the server. Finally, the client receives the
 classifications from the server and writes them to the provide

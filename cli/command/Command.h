@@ -16,7 +16,7 @@ protected:
 public:
     /**
      * Constructor.
-     * @param dio pointer to a DefaultIO object for input and output
+     * @param dio pointer to a DefaultIO object for userInput and output
      * @param classifierData classifierData Object
      */
     Command(DefaultIO* dio, ClassifierData* classifierData);

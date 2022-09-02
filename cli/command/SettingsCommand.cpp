@@ -27,7 +27,7 @@ void SettingsCommand::execute() {
 
     std::string input = m_dio->read();
 
-    // If no input was given
+    // If no userInput was given
     if (input.empty()) {
         return;
     }
@@ -49,8 +49,6 @@ void SettingsCommand::execute() {
     }
 
     // Validating the metric
-    bool isValidMetric = true;
-
     if (attributes[1] == "EUC") {
         m_classifierData->classifier().metric(std::move(std::unique_ptr<Distance>(new EuclideanDistance())));
     } else if (attributes[1] == "CHE") {
@@ -58,10 +56,6 @@ void SettingsCommand::execute() {
     } else if (attributes[1] == "MAN") {
         m_classifierData->classifier().metric(std::move(std::unique_ptr<Distance>(new ManhattanDistance())));
     } else {
-        isValidMetric = false;
-    }
-
-    if (!isValidMetric) {
         m_dio->write("Invalid metric\n");
         return;
     }

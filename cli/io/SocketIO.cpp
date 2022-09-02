@@ -3,9 +3,7 @@
 SocketIO::SocketIO(Socket& socket) : m_socket(socket) {}
 
 std::string SocketIO::read() {
-    char buf[512];
-    m_socket.recv(buf, 512);
-    return buf;
+    return m_socket.recv();
 }
 
 void SocketIO::write(const std::string &str) {

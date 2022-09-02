@@ -4,11 +4,11 @@
 #include <string>
 
 /**
- * This class represents a socket that communicates with others using the TCP protocol.
+ * This class represents a m_socket that communicates with others using the TCP protocol.
  */
 class Socket {
 private:
-    static const int BUFFER_LIM = 512;
+    static const int BUFFER_LIM = 4096;
     int m_sockfd;
 
 public:
@@ -18,14 +18,14 @@ public:
     Socket();
 
     /**
-     * @return the socket descriptor
+     * @return the m_socket descriptor
      */
     int sockFd() const;
 
     /**
-     * Bind a name to the socket, and adds a timeout mechanism.
+     * Bind a name to the m_socket, and adds a timeout mechanism.
      * @param cp a string that represents the ip address
-     * @param port the desired port of the socket
+     * @param port the desired port of the m_socket
      */
     void bind(int port) const;
 
@@ -43,25 +43,23 @@ public:
 
     /**
      * Accept a client.
-     * @return the client's socket fd
+     * @return the client's m_socket fd
      */
     int accept() const;
 
      /**
-      * Send a message on a socket.
+      * Send a message on the m_socket.
       * @param message the message to be sent
       */
     void send(const std::string& message) const;
 
      /**
-      * Receive a message from a socket.
-      * @param buf the buffer the received message will be written to
-      * @param size the size of the buffer
+      * Receive a message from the m_socket.
       */
-    void recv(char* buf, int size) ;
+    std::string recv() ;
 
     /**
-     * Close the socket.
+     * Close the m_socket.
      */
     void close() const;
 };

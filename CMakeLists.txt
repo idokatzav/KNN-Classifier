@@ -75,7 +75,9 @@ set(SERVER
 
 set(CLIENT
         ${SOCKET}
-        "client/client.cpp"
+        client/Client.h
+        client/Client.cpp
+        "client/main.cpp"
 )
 
 add_executable(Server ${SERVER})
