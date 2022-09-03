@@ -6,10 +6,11 @@ DownloadResultsCommand::DownloadResultsCommand(DefaultIO *dio, ClassifierData *c
 }
 
 void DownloadResultsCommand::execute() {
-    // TODO: check if any classifications were done
+    if (m_classifierData->classifiedResult().empty()) {
+        m_dio->write("No classification was done\n");
+        return;
+    }
 
     // Notify the client it needs to save the content in a file
-    std::string res = "HELLO FROM THE OTHER SIDE"; // TODO
-
-    m_dio->write("\\Download" + res + "\\End");
+    m_dio->write("\\Download" + m_classifierData->classifiedResult() + "\\End");
 }
