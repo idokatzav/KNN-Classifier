@@ -18,6 +18,13 @@ private:
     std::unique_ptr<Distance> m_metric;
     std::vector<std::unique_ptr<Classified>> m_classifiedData;
     std::unique_ptr<std::map<std::string, int>> m_handles;
+    std::string m_consfusionMatrixStr;
+
+    /**
+    * creates a string contains the confusion matrix
+    * @return the string wih the information.
+    */
+    std::string confusionMatrix();
 
 public:
     /**
@@ -69,10 +76,10 @@ public:
     void classify(Classified& unclassified) const;
 
     /**
-    * creates a string contains the confusion matrix
-    * @return the string wih the information.
-    */
-    std::string confusionMatrix();
+     * Getter for the confusion matrix
+     * @return the string
+     */
+    std::string confusionMatrixString() const;
 
     /**
      * Given unclassified data in a csv format, this method uses

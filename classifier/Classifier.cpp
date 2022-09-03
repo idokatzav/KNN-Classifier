@@ -9,6 +9,7 @@ Classifier::Classifier() : m_isInit(false) {
     m_k = 5;
     m_metric =  std::unique_ptr<Distance>(new EuclideanDistance());
     m_handles = std::unique_ptr<std::map<std::string, int>>(new std::map<std::string, int>);
+    m_consfusionMatrixStr = "";
 }
 
 void Classifier::init(const std::string& classifiedData) {
@@ -32,7 +33,7 @@ void Classifier::init(const std::string& classifiedData) {
 
         m_classifiedData.push_back(std::move(classified));
     }
-
+    confusionMatrix();
     m_isInit = true;
 }
 
@@ -139,5 +140,9 @@ std::string Classifier::confusionMatrix() {
         }
         res += "\n";
     }
-    return res;
+    m_consfusionMatrixStr = res;
+}
+
+std::string Classifier::confusionMatrixString() const {
+    return m_consfusionMatrixStr;
 }
