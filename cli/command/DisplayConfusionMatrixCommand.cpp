@@ -11,6 +11,7 @@ void DisplayConfusionMatrixCommand::execute() {
         return;
     }
 
+    m_dio->write(m_classifierData->classifier().confusionMatrixString());
     // TODO: add confusion matrix function in classifier
     /*std::vector<std::string> trainResults;
     std::vector<std::unique_ptr<Classified>>& classified = m_classifierData->classifier().ClassifiedDataVector();
