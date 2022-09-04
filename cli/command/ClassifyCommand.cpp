@@ -19,8 +19,6 @@ void ClassifyCommand::execute() {
     std::string res = m_classifierData->classifier().classify(m_classifierData->uploadedData());
     m_classifierData->uploadResult(res);
 
-    // TODO: add numbers
-
     // Inform the user the classification is done
     m_dio->write("Classifying data complete.\n");
 }

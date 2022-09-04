@@ -11,8 +11,6 @@ void DownloadResultsCommand::execute() {
         return;
     }
 
-    m_dio->write("Please upload your desired download path");
-
     // Send the classified result
     m_dio->write("\\Download" + m_classifierData->classifiedResult() + "\\End");
 }

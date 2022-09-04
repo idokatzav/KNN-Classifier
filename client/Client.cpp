@@ -21,6 +21,12 @@ void Client::upload() {
     std::string filePath = userInput(), response, line;
     std::ifstream inFile(filePath);
 
+    if(!inFile) {
+        std::cout << "File doesn't exist\n";
+        m_socket->send("ERROR");
+        return;
+    }
+
     while (std::getline(inFile, line)) {
         response += line + "\n";
     }
@@ -38,6 +44,9 @@ void Client::download() {
     // Erase it from the message
     m_message.erase(m_message.find(m_downloadIndicator),
                     m_downloadIndicator.length() + result.length() + m_endOfDownloadIndicator.length());
+
+    // Greet the user
+    std::cout << "Please upload your desired download path." << std::endl;
 
     // Write into the specified file
     std::string resultPath = userInput();

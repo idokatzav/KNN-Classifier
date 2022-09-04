@@ -23,8 +23,6 @@ void ServerSocket::bind(int port) const {
     if (::bind(m_sockfd, (struct sockaddr*)& sin, sizeof(sin)) < 0) {
         perror("Error binding m_socket");
     }
-
-    // TODO: Add a timeout mechanism
 }
 
 int ServerSocket::getRetVal() {

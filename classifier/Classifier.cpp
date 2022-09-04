@@ -95,12 +95,17 @@ void Classifier::classify(Classified& unclassified) const {
 
 std::string Classifier::classify(const std::string& unclassifiedData) const {
     std::vector<std::string> lines = split(unclassifiedData, '\n');
+    int size = lines.size();
     std::string res;
 
-    for (auto & line : lines) {
-        std::unique_ptr<Classified> unclassified = Classified::fromLine(line);
+    for (int i = 0; i < size; ++i) {
+        std::unique_ptr<Classified> unclassified = Classified::fromLine(lines[i]);
         classify(*unclassified);
-        res += unclassified->handle() + "\n";
+        res +=  std::to_string(i + 1) + ". " + unclassified->handle();
+
+        if (i < size - 1) {
+            res += "\n";
+        }
     }
 
     return res;

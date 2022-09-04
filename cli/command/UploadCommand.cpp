@@ -10,11 +10,19 @@ void UploadCommand::execute() {
 
         std::string classifiedData = m_dio->read();
 
+        if (classifiedData == "ERROR") {
+            return;
+        }
+
         m_classifierData->classifier().init(classifiedData);
     } else {
         m_dio->write("\\UploadPlease upload your local test CSV file.\n");
 
         std::string unclassifiedData = m_dio->read();
+
+        if (unclassifiedData == "ERROR") {
+            return;
+        }
 
         m_classifierData->uploadData(unclassifiedData);
     }

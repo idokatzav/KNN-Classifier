@@ -14,10 +14,12 @@ int main() {
     // Server Constants
     const int server_port = 5555;
     const int k = 5;
+
     // Create a socket, and bind a name to it
     std::unique_ptr<ServerSocket> socket(new ServerSocket());
     socket->bind(server_port);
     int activeThreads = 0;
+
     // Listen for connections
     socket->listen();
 
@@ -41,8 +43,11 @@ int main() {
         std::thread thread1(&clientCli, std::move(dio), &activeThreads);
         thread1.detach();
     }
+
     while (!activeThreads) {}
+
     // Finish the program
     socket->close();
+
     return 0;
 }
