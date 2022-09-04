@@ -7,7 +7,7 @@ class DisplayConfusionMatrixCommand : public Command {
 public:
     /**
      * Constructor
-     * @param dio pointer to a DefaultIO object for userInput and output
+     * @param dio pointer to a DefaultIO object for user input and output
      * @param classifierData classifierData Object
      */
     DisplayConfusionMatrixCommand(DefaultIO* dio, ClassifierData* classifierData);

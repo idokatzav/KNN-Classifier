@@ -9,8 +9,8 @@
 class DefaultIO {
 public:
     /**
-     * Reads userInput and returns it as a string.
-     * @return the userInput
+     * Reads user input and returns it as a string.
+     * @return the user input
      */
     virtual std::string read() = 0;
 

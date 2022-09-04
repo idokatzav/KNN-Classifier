@@ -9,7 +9,7 @@ Classifier::Classifier() : m_isInit(false) {
     m_k = 5;
     m_metric =  std::unique_ptr<Distance>(new EuclideanDistance());
     m_handles = std::unique_ptr<std::map<std::string, int>>(new std::map<std::string, int>);
-    m_consfusionMatrixStr = "";
+    m_confusionMatrixStr = "";
 }
 
 void Classifier::init(const std::string& classifiedData) {
@@ -110,39 +110,52 @@ std::string Classifier::confusionMatrix() {
     if (!isInit()) {
         throw std::runtime_error("Classifier uninitialized");
     }
+
     std::string res;
-    for (std::pair<const std::string, int> cur:*(m_handles.get())) {
-        std::unique_ptr<std::map<std::string, int>> curTypeMap(new std::map<std::string,int>);
-        for (int i = 0; i < m_classifiedData.size(); ++i) {
-            if (m_classifiedData[i]->handle().compare(cur.first)) {
-                std::vector<double> vec;
-                auto vec1 = m_classifiedData[i]->data();
-                for (int j = 0; j < vec1.size(); ++j) {
-                    vec.push_back(vec1[j]);
-                }
-                Classified curClassified("", vec);
+
+    // Iterate through all the handles and their occurrences in the saved classified data
+    for (const std::pair<const std::string, int>& pair : *(m_handles)) {
+        std::map<std::string, int> curTypeMap;
+
+        /*
+         * For each classified vector, of the same handle as the iterated one,
+         * classify it again, and save the classified result, as well as the number of times it appeared.
+         */
+        for (auto& classified : m_classifiedData) {
+            if (classified->handle() == pair.first) {
+                std::vector<double> attributes = classified->data();
+
+                // Classify the classified data
+                Classified curClassified("", attributes);
                 classify(curClassified);
                 std::string handle = curClassified.handle();
-                if (curTypeMap->count(handle)) {
-                    curTypeMap->at(handle)++;
+
+                if (curTypeMap.count(handle)) {
+                    curTypeMap.at(handle)++;
                 } else {
-                    curTypeMap->operator[](handle) = 1;
+                    curTypeMap[handle] = 1;
                 }
             }
         }
-        auto tot = cur.second;
-        for (std::pair<const std::string, int> handleCur:*(curTypeMap.get())) {
-            res += handleCur.first + "\t";
-            double res1 = (double)handleCur.second / tot;
-            int res1Int = handleCur.second / tot;
-            int addition = (res1 - res1Int >= 0.5) ? 1 : 0;
-            res += std::to_string(res1Int + addition) + "%\t";
+
+        int numberOfOccurrences = pair.second;
+
+        for (const std::pair<const std::string, int>& handle : curTypeMap) {
+            res += handle.first + "\t";
+
+            int ratio = handle.second / numberOfOccurrences;
+            double preciseRatio = (double) handle.second / numberOfOccurrences;
+
+            int addition = (preciseRatio - ratio >= 0.5) ? 1 : 0;
+            res += std::to_string(ratio + addition) + "%\t";
         }
+
         res += "\n";
     }
-    m_consfusionMatrixStr = res;
+
+    m_confusionMatrixStr = res;
 }
 
 std::string Classifier::confusionMatrixString() const {
-    return m_consfusionMatrixStr;
+    return m_confusionMatrixStr;
 }

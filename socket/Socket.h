@@ -4,7 +4,7 @@
 #include <string>
 
 /**
- * This class represents a m_socket that communicates with others using the TCP protocol.
+ * This class represents a socket that communicates with others using the TCP protocol.
  */
 class Socket {
 protected:
@@ -18,24 +18,24 @@ public:
     Socket();
 
     /**
-     * @return the m_socket descriptor
+     * @return the socket descriptor
      */
     int sockFd() const;
 
-     /**
-      * Send a message on the m_socket.
-      * @param message the message to be sent
-      */
+   /**
+    * Send a message on the socket.
+    * @param message the message to be sent
+    */
     virtual void send(std::string message) const = 0;
 
-     /**
-      * Receive a message from the m_socket.
-      */
+   /**
+    * Receive a message from the socket.
+    */
     virtual std::string recv() = 0 ;
 
-    /**
-     * Close the m_socket.
-     */
+   /**
+    * Close the socket.
+    */
     void close() const;
 };
 

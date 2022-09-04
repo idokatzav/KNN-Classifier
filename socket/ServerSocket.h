@@ -4,6 +4,10 @@
 #include "Socket.h"
 #define CLIENT_TIME_OUT_SECONDS 60
 
+
+/**
+ * This class represents a server socket that communicates with others using the TCP protocol.
+ */
 class ServerSocket : public Socket {
 private:
     int m_clientSock;
@@ -11,10 +15,13 @@ private:
     fd_set m_rfds;
 
 public:
+    /**
+     * Constructor.
+     */
     ServerSocket();
 
     /**
-     * Bind a name to the m_socket, and adds a timeout mechanism.
+     * Bind a name to the socket, and adds a timeout mechanism.
      * @param cp a string that represents the ip address
      * @param port the desired port of the m_socket
      */
@@ -27,12 +34,20 @@ public:
 
     /**
      * Accept a client.
-     * @return the client's m_socket fd
+     * @return the client's socket fd
      */
     int accept();
 
+   /**
+    * Send a message on the socket.
+    * @param message the message to be sent
+    */
     void send(std::string message) const override;
 
+
+    /**
+     * Receive a message from the socket.
+     */
     std::string recv() override;
 };
 

@@ -1,7 +1,6 @@
 #include "../socket/ServerSocket.h"
-#include "../cli/Cli.h"
 #include "../cli/io/SocketIO.h"
-#include <memory>
+#include "../cli/Cli.h"
 #include <thread>
 
 void clientCli(std::unique_ptr<DefaultIO> dio) {

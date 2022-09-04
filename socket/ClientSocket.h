@@ -3,6 +3,9 @@
 
 #include "Socket.h"
 
+/**
+ * This class represents a client socket that communicates with others using the TCP protocol.
+ */
 class ClientSocket : public Socket {
 public:
     /**
@@ -12,8 +15,15 @@ public:
      */
     void connect(const char* cp, int port) const;
 
+    /**
+     * Send a message on the socket.
+     * @param message the message to be sent
+     */
     void send(std::string message) const override;
 
+    /**
+     * Receive a message from the socket.
+     */
     std::string recv() override;
 };
 

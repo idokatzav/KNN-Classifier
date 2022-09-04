@@ -28,7 +28,7 @@ void SettingsCommand::execute() {
 
     std::string input = m_dio->read();
 
-    // If no userInput was given
+    // If no user input was given
     if (input.empty()) {
         return;
     }

@@ -18,7 +18,7 @@ private:
     std::unique_ptr<Distance> m_metric;
     std::vector<std::unique_ptr<Classified>> m_classifiedData;
     std::unique_ptr<std::map<std::string, int>> m_handles;
-    std::string m_consfusionMatrixStr;
+    std::string m_confusionMatrixStr;
 
     /**
     * creates a string contains the confusion matrix
@@ -76,12 +76,6 @@ public:
     void classify(Classified& unclassified) const;
 
     /**
-     * Getter for the confusion matrix
-     * @return the string
-     */
-    std::string confusionMatrixString() const;
-
-    /**
      * Given unclassified data in a csv format, this method uses
      * the KNN algorithm to classify the object
      * @param unclassifiedData unclassified data, in a csv format
@@ -89,6 +83,12 @@ public:
      * @return a string in a csv format with the classified data
      */
     std::string classify(const std::string& unclassifiedData) const;
+
+    /**
+     * Getter for the confusion matrix
+     * @return the string
+     */
+    std::string confusionMatrixString() const;
 
 };
 
