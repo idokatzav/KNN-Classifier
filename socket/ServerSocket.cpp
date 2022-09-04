@@ -5,6 +5,12 @@
 #include <cstring>
 #include <algorithm>
 
+ServerSocket::ServerSocket() : Socket() {
+    m_timeval.tv_sec = CLIENT_TIME_OUT_SECONDS;
+    m_timeval.tv_usec = 0;
+    FD_ZERO(&m_rfds);
+    FD_SET(m_sockfd, &m_rfds);
+}
 
 void ServerSocket::bind(int port) const {
     // Bind the socket
