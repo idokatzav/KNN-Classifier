@@ -33,7 +33,7 @@ sudo apt install cmake
 
 Clone the repository:
 ```bash
-git clone 'https://github.com/JonathanKelsi/Server-Client-KNN-Classifier'
+git clone 'https://github.com/idokatzav/KNN-Classifier'
 ```
 
 ### Executing The Program
