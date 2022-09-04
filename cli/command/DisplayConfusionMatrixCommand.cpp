@@ -6,8 +6,8 @@ DisplayConfusionMatrixCommand::DisplayConfusionMatrixCommand(DefaultIO *dio, Cla
 }
 
 void DisplayConfusionMatrixCommand::execute() {
-    if (m_classifierData->classifiedResult().empty()) {
-        m_dio->write("No classification was done\n");
+    if (!m_classifierData->classifier().isInit()) {
+        m_dio->write("No train file was uploaded\n");
         return;
     }
 

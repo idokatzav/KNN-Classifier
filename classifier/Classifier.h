@@ -88,7 +88,7 @@ public:
      * Getter for the confusion matrix
      * @return the string
      */
-    std::string confusionMatrixString() const;
+    std::string confusionMatrixString();
 
 };
 

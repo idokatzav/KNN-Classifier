@@ -33,7 +33,7 @@ void Classifier::init(const std::string& classifiedData) {
 
         m_classifiedData.push_back(std::move(classified));
     }
-    confusionMatrix();
+
     m_isInit = true;
 }
 
@@ -111,16 +111,26 @@ std::string Classifier::confusionMatrix() {
         throw std::runtime_error("Classifier uninitialized");
     }
 
-    std::string res;
+    std::string res = "\t";
+
+    // Create the first row of the
+    for (const std::pair<const std::string, int>& pair : *(m_handles)) {
+        res += pair.first + "\t";
+    }
+
+    res += "\n";
 
     // Iterate through all the handles and their occurrences in the saved classified data
     for (const std::pair<const std::string, int>& pair : *(m_handles)) {
-        std::map<std::string, int> curTypeMap;
+        // Add the row handle specifier
+        res += pair.first + "\t";
 
         /*
          * For each classified vector, of the same handle as the iterated one,
          * classify it again, and save the classified result, as well as the number of times it appeared.
          */
+        std::map<std::string, int> curTypeMap;
+
         for (auto& classified : m_classifiedData) {
             if (classified->handle() == pair.first) {
                 std::vector<double> attributes = classified->data();
@@ -140,14 +150,19 @@ std::string Classifier::confusionMatrix() {
 
         int numberOfOccurrences = pair.second;
 
-        for (const std::pair<const std::string, int>& handle : curTypeMap) {
-            res += handle.first + "\t";
+        // Iterate through the handles and construct the row matching the handle
+        for (const std::pair<const std::string, int>& handle : *(m_handles)) {
+            int percentage = 0;
 
-            int ratio = handle.second / numberOfOccurrences;
-            double preciseRatio = (double) handle.second / numberOfOccurrences;
+            if (curTypeMap.count(handle.first)) {
+                int ratio = 100 * curTypeMap[handle.first] / numberOfOccurrences;
+                double preciseRatio = (double) 100 * curTypeMap[handle.first] / numberOfOccurrences;
 
-            int addition = (preciseRatio - ratio >= 0.5) ? 1 : 0;
-            res += std::to_string(ratio + addition) + "%\t";
+                int roundIndicator = (preciseRatio - ratio >= 0.5) ? 1 : 0;
+                percentage += ratio + roundIndicator;
+            }
+
+            res += std::to_string(percentage) + "%\t";
         }
 
         res += "\n";
@@ -156,6 +171,9 @@ std::string Classifier::confusionMatrix() {
     m_confusionMatrixStr = res;
 }
 
-std::string Classifier::confusionMatrixString() const {
+std::string Classifier::confusionMatrixString() {
+    // Create the confusion matrix
+    confusionMatrix();
+
     return m_confusionMatrixStr;
 }

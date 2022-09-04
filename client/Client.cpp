@@ -22,7 +22,7 @@ void Client::upload() {
     std::ifstream inFile(filePath);
 
     while (std::getline(inFile, line)) {
-        response += line;
+        response += line + "\n";
     }
 
     m_socket->send(response);

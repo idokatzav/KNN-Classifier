@@ -11,6 +11,8 @@ void DownloadResultsCommand::execute() {
         return;
     }
 
-    // Notify the client it needs to save the content in a file
+    m_dio->write("Please upload your desired download path");
+
+    // Send the classified result
     m_dio->write("\\Download" + m_classifierData->classifiedResult() + "\\End");
 }

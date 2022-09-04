@@ -12,7 +12,7 @@ Cli::Cli(DefaultIO* dio) : m_dio(dio) {
 
     m_commands = {new UploadCommand(m_dio, m_classifierData), new SettingsCommand(m_dio, m_classifierData),
                   new ClassifyCommand(m_dio, m_classifierData), new DisplayResultsCommand(m_dio, m_classifierData),
-                  new DownloadResultsCommand(m_dio, m_classifierData)/*, new DisplayConfusionMatrixCommand(m_dio, m_classifierData)*/};
+                  new DownloadResultsCommand(m_dio, m_classifierData), new DisplayConfusionMatrixCommand(m_dio, m_classifierData)};
 }
 
 void Cli::start() {
