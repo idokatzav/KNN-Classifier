@@ -21,6 +21,12 @@ public:
     ServerSocket();
 
     /**
+     * returns retval for timeoutCheck
+     * @return retval.
+     */
+    int getRetVal();
+
+    /**
      * Bind a name to the socket, and adds a timeout mechanism.
      * @param cp a string that represents the ip address
      * @param port the desired port of the m_socket

@@ -27,6 +27,10 @@ void ServerSocket::bind(int port) const {
     // TODO: Add a timeout mechanism
 }
 
+int ServerSocket::getRetVal() {
+    return select(m_sockfd, &m_rfds, NULL, NULL, &m_timeval);
+}
+
 void ServerSocket::listen() const {
     // Listen for a connection, with a queue length of 5
     if (::listen(m_sockfd, 5) < 0) {
