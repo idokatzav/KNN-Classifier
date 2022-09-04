@@ -3,6 +3,7 @@
 
 #include "../socket/ClientSocket.h"
 #include <memory>
+#include <thread>
 
 class Client {
 private:
@@ -23,6 +24,7 @@ private:
 
     void general();
 
+    void writeIntoFile(std::string resultPath, std::string output);
 public:
     Client(char* ip_address, int port_num);
 

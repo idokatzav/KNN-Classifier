@@ -2,6 +2,12 @@
 #include "../cli/Cli.h"
 #include "../cli/io/SocketIO.h"
 #include <memory>
+#include <thread>
+
+void clientCli(std::unique_ptr<DefaultIO> dio) {
+    std::unique_ptr<Cli> cli(new Cli(dio.get()));
+    cli->start();
+}
 
 int main() {
     // Server Constants
@@ -26,8 +32,8 @@ int main() {
 
         // Handle the client
         std::unique_ptr<DefaultIO> dio(new SocketIO(*socket));
-        std::unique_ptr<Cli> cli(new Cli(dio.get()));
-        cli->start();
+        std::thread thread1(&clientCli, std::move(dio));
+        thread1.detach();
     }
 
     // Finish the program

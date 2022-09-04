@@ -41,11 +41,16 @@ void Client::download() {
 
     // Write into the specified file
     std::string resultPath = userInput();
+    std::thread thread(&Client::writeIntoFile, this, resultPath, result);
+    thread.detach();
 
+}
+
+void Client::writeIntoFile(std::string resultPath, std::string output) {
     std::ofstream oFile;
     oFile.open(resultPath + "/results.txt");
 
-    oFile << result;
+    oFile << output;
     oFile.close();
 }
 
