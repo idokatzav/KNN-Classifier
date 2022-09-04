@@ -37,6 +37,11 @@ public:
     * Close the socket.
     */
     void close() const;
+
+    /**
+     * Destructor.
+     */
+    virtual ~Socket() = default;
 };
 
 #endif

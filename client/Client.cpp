@@ -103,4 +103,3 @@ void Client::communicate() {
 
     m_socket->close();
 }
-

@@ -1,52 +1,18 @@
 #include "ServerSocket.h"
 #include "Socket.h"
-#include <netinet/in.h>
 #include <sys/socket.h>
 #include <cstring>
 #include <algorithm>
 
-ServerSocket::ServerSocket() : Socket() {
+ServerSocket::ServerSocket(int socket) : Socket(), m_clientSock(socket), m_isRunning(true) {
     m_timeval.tv_sec = CLIENT_TIME_OUT_SECONDS;
     m_timeval.tv_usec = 0;
     FD_ZERO(&m_rfds);
     FD_SET(m_sockfd, &m_rfds);
 }
 
-void ServerSocket::bind(int port) const {
-    // Bind the socket
-    struct sockaddr_in sin{};
-    memset(&sin, 0, sizeof(sin));
-    sin.sin_family = AF_INET;
-    sin.sin_addr.s_addr = INADDR_ANY;
-    sin.sin_port = htons(port);
-
-    if (::bind(m_sockfd, (struct sockaddr*)& sin, sizeof(sin)) < 0) {
-        perror("Error binding m_socket");
-    }
-}
-
 int ServerSocket::getRetVal() {
-    return select(m_sockfd, &m_rfds, NULL, NULL, &m_timeval);
-}
-
-void ServerSocket::listen() const {
-    // Listen for a connection, with a queue length of 5
-    if (::listen(m_sockfd, 5) < 0) {
-        perror("Error listening for a connection");
-    }
-}
-
-int ServerSocket::accept() {
-    struct sockaddr_in client_sin{};
-    unsigned int addr_len = sizeof(client_sin);
-
-    m_clientSock = ::accept(m_sockfd, (struct sockaddr *) &client_sin, &addr_len);
-
-    if (m_clientSock < 0) {
-        perror("Error accepting a connection");
-    }
-
-    return m_clientSock;
+    return select(m_sockfd + 1, &m_rfds, NULL, NULL, &m_timeval);
 }
 
 void ServerSocket::send(std::string message) const {
@@ -85,4 +51,12 @@ std::string ServerSocket::recv() {
     // Remove all occurrences of the End Of Text character
     response.erase(std::remove(response.begin(), response.end(), '\003'), response.end());
     return response;
+}
+
+bool ServerSocket::isRunning() {
+    return m_isRunning;
+}
+
+void ServerSocket::stopRunning() {
+    m_isRunning = false;
 }
