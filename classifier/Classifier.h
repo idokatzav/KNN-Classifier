@@ -22,9 +22,8 @@ private:
 
     /**
     * creates a string contains the confusion matrix
-    * @return the string wih the information.
     */
-    std::string confusionMatrix();
+    void confusionMatrix();
 
 public:
     /**
