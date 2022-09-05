@@ -31,9 +31,13 @@ void handleThreads(threadsAndSockets* threads) {
         if (!(*threads)[i].second->isRunning()) {
             (*threads)[i].first.join();
             delete (*threads)[i].second;
-            if (size != 1) {
+            if (size != 1 && i != 0) {
                 (*threads).erase((*threads).cbegin() + i-- + (size - size--));
             } else {
+                if (i == 0) {
+                    (*threads)[0].first.swap((*threads)[size - 1].first);
+                    (*threads)[0].second = (*threads)[size - 1].second;
+                }
                 (*threads).pop_back();
             }
         }
@@ -124,7 +128,7 @@ int main() {
 
     while (true) {
         // Add a timeout mechanism
-        int retval = timeout(sockFd, 60);
+        int retval = timeout(sockFd, 10);
 
         if (retval < 0) {
             perror("Error with the socket!");
