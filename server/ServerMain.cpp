@@ -31,7 +31,11 @@ void handleThreads(threadsAndSockets* threads) {
         if (!(*threads)[i].second->isRunning()) {
             (*threads)[i].first.join();
             delete (*threads)[i].second;
-            (*threads).erase((*threads).cbegin() + i-- + (size - size--));
+            if (size != 1) {
+                (*threads).erase((*threads).cbegin() + i-- + (size - size--));
+            } else {
+                (*threads).pop_back();
+            }
         }
     }
 }
@@ -96,7 +100,7 @@ int acceptCon(int socket_fd) {
 
 int main() {
     // Server Constants
-    const int serverPort = 5555;
+    const int serverPort = 5556;
     const int k = 5;
 
     // Threads count
@@ -119,8 +123,8 @@ int main() {
     ListenForCon(sockFd);
 
     while (true) {
-        // TODO: Add a timeout mechanism
-        int retval = timeout(sockFd, 10);
+        // Add a timeout mechanism
+        int retval = timeout(sockFd, 60);
 
         if (retval < 0) {
             perror("Error with the socket!");
