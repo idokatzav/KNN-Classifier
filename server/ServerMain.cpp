@@ -31,7 +31,7 @@ void handleThreads(threadsAndSockets* threads) {
         if (!(*threads)[i].second->isRunning()) {
             (*threads)[i].first.join();
             delete (*threads)[i].second;
-            if (size != 1 && i != 0) {
+            if (size != 1 && i != 0 && i != size - 1) {
                 (*threads).erase((*threads).cbegin() + i-- + (size - size--));
             } else {
                 if (i == 0) {
