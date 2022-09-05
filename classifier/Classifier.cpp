@@ -111,7 +111,7 @@ std::string Classifier::classify(const std::string& unclassifiedData) const {
     return res;
 }
 
-void Classifier::confusionMatrix() {
+std::string Classifier::confusionMatrix() {
     if (!isInit()) {
         throw std::runtime_error("Classifier uninitialized");
     }

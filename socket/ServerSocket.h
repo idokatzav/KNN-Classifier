@@ -2,6 +2,8 @@
 #define KNN_CLASSIFIER_SERVERSOCKET_H
 
 #include "Socket.h"
+#include "ClientSocket.h"
+#include <vector>
 #define CLIENT_TIME_OUT_SECONDS 60
 
 
@@ -10,6 +12,7 @@
  */
 class ServerSocket : public Socket {
 private:
+    bool m_isRunning;
     int m_clientSock;
     struct timeval m_timeval;
     fd_set m_rfds;
@@ -17,32 +20,14 @@ private:
 public:
     /**
      * Constructor.
+     * @param socket a client's socket
      */
-    ServerSocket();
+    ServerSocket(int socket);
 
     /**
-     * returns retval for timeoutCheck
-     * @return retval.
+     * @return a value for timeout check
      */
     int getRetVal();
-
-    /**
-     * Bind a name to the socket, and adds a timeout mechanism.
-     * @param cp a string that represents the ip address
-     * @param port the desired port of the m_socket
-     */
-    void bind(int port) const;
-
-    /**
-     * Listen for a connection.
-     */
-    void listen() const;
-
-    /**
-     * Accept a client.
-     * @return the client's socket fd
-     */
-    int accept();
 
    /**
     * Send a message on the socket.
@@ -50,11 +35,25 @@ public:
     */
     void send(std::string message) const override;
 
-
     /**
      * Receive a message from the socket.
      */
     std::string recv() override;
+
+    /**
+     * @return whether the socket is running
+     */
+    bool isRunning();
+
+    /**
+     * Stop running.
+    */
+    void stopRunning();
+
+    /**
+     * Destructor.
+     */
+    ~ServerSocket() = default;
 };
 
 
