@@ -1,6 +1,6 @@
 #include "SocketIO.h"
 
-SocketIO::SocketIO(ServerSocket& socket) : m_socket(socket) {}
+SocketIO::SocketIO(Socket& socket) : m_socket(socket) {}
 
 std::string SocketIO::read() {
     return m_socket.recv();
@@ -9,9 +9,4 @@ std::string SocketIO::read() {
 void SocketIO::write(const std::string &str) {
     m_socket.send(str);
 }
-
-void SocketIO::stopRunning() {
-    m_socket.stopRunning();
-}
-
 

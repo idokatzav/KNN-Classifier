@@ -25,11 +25,6 @@ public:
      * Receive a message from the socket.
      */
     std::string recv() override;
-
-    /**
-     * Destructor.
-     */
-    ~ClientSocket() = default;
 };
 
 

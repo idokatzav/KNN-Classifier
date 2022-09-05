@@ -2,21 +2,21 @@
 #define KNN_CLASSIFIER_SOCKETIO_H
 
 #include "DefaultIO.h"
-#include "../../socket/ServerSocket.h"
+#include "../../socket/Socket.h"
 
 /**
  * This class represents communication via sockets.
  */
 class SocketIO : public DefaultIO {
 private:
-    ServerSocket& m_socket;
+    Socket& m_socket;
 
 public:
     /**
      * Constructor.
      * @param socket a socket
      */
-    SocketIO(ServerSocket& socket);
+    SocketIO(Socket& socket);
 
     /**
      * Reads user input and returns it as a string.
@@ -29,13 +29,6 @@ public:
      * @param str the output
      */
     void write(const std::string &str) override;
-
-    /**
-     * Stop running.
-     */
-    void stopRunning();
-
-    ~SocketIO() = default;
 };
 
 #endif

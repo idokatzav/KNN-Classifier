@@ -5,7 +5,6 @@
 #include "command/DisplayResultsCommand.h"
 #include "command/DownloadResultsCommand.h"
 #include "command/DisplayConfusionMatrixCommand.h"
-#include "io/SocketIO.h"
 
 
 Cli::Cli(DefaultIO* dio) : m_dio(dio) {
@@ -52,16 +51,10 @@ void Cli::start() {
 
         m_commands[index - 1]->execute();
     }
-
-    try {
-        SocketIO* socketIo = (SocketIO*) m_dio;
-        socketIo->stopRunning();
-    } catch (const std::exception& e) {}
 }
 
 Cli::~Cli() {
     delete m_classifierData;
-    delete m_dio;
 
     for (int i = 0; i < m_commands.size(); ++i) {
         delete m_commands[i];
