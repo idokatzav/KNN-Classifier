@@ -75,7 +75,7 @@ set(SERVER
         ${IO}
         ${CLI}
         "server/ServerMain.cpp"
-)
+        server/ServerMain.h)
 
 set(CLIENT
         ${SOCKET}

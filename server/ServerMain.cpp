@@ -1,10 +1,4 @@
-#include "../socket/ServerSocket.h"
-#include "../cli/io/SocketIO.h"
-#include "../cli/Cli.h"
-#include <thread>
-#include <netinet/in.h>
-#include <csignal>
-#include <cstring>
+#include "ServerMain.h"
 
 typedef std::vector<std::pair<std::thread, ServerSocket*>> threadsAndSockets;
 
@@ -36,12 +30,7 @@ void handleThreads(threadsAndSockets* threads) {
     }
 }
 
-/**
- * Bind a socket a name.
- * @param server_port the desired port
- * @param socket_fd the socket to be bind
- */
-void bindSocket(int server_port, int socket_fd) {
+void ServerMain::bindSocket(int server_port, int socket_fd) {
     // Bind the socket
     struct sockaddr_in sin{};
     memset(&sin, 0, sizeof(sin));
@@ -54,24 +43,13 @@ void bindSocket(int server_port, int socket_fd) {
     }
 }
 
-/**
- * Listen
- * @param socket_fd
- */
-void ListenForCon(int socket_fd) {
+void ServerMain::ListenForCon(int socket_fd) {
     if (::listen(socket_fd, 5) < 0) {
         perror("Error listening for a connection");
     }
 }
 
-/**
- * Create a timeout mechanism for a socket.
- * @param socket_fd the socket
- * @param seconds the number of seconds for the timeout
- * @return a timeout indicator
- */
-int timeout(int socket_fd, int seconds) {
-    struct timeval m_timeval;
+int ServerMain::timeout(int socket_fd, int seconds) {
     m_timeval.tv_sec = seconds;
     m_timeval.tv_usec = 0;
 
@@ -83,22 +61,22 @@ int timeout(int socket_fd, int seconds) {
     return retval;
 }
 
-/**
- * Accept a client.
- * @param socket_fd a socket
- * @return the client's socket fd
- */
-int acceptCon(int socket_fd) {
+ServerMain::ServerMain() {
+    m_timeval.tv_usec = 0;
+    m_timeval.tv_sec = 0;
+}
+
+int ServerMain::acceptCon(int socket_fd) {
     struct sockaddr_in client_sin{};
     unsigned int addr_len = sizeof(client_sin);
     return ::accept(socket_fd, (struct sockaddr *) &client_sin, &addr_len);
 }
 
 int main() {
+    ServerMain* serverMain = new ServerMain();
     // Server Constants
     const int serverPort = 5556;
     const int k = 5;
-
     // Threads count
     int activeThreads = 0;
     threadsAndSockets threads;
@@ -114,13 +92,13 @@ int main() {
     // Create a socket, bind it a name and listen for a connection
     int sockFd = socket(AF_INET, SOCK_STREAM, 0);
 
-    bindSocket(serverPort, sockFd);
+    serverMain->bindSocket(serverPort, sockFd);
 
-    ListenForCon(sockFd);
+    serverMain->ListenForCon(sockFd);
 
     while (true) {
         // Add a timeout mechanism
-        int retval = timeout(sockFd, 60);
+        int retval = serverMain->timeout(sockFd, 60);
 
         if (retval < 0) {
             perror("Error with the socket!");
@@ -129,7 +107,7 @@ int main() {
         }
 
         // Accept a client
-        int clientSocket = acceptCon(sockFd);
+        int clientSocket = serverMain->acceptCon(sockFd);
 
         if (clientSocket < 0) {
             perror("Error accepting a connection");
@@ -148,6 +126,6 @@ int main() {
 
     // Finish the program
     close(sockFd);
-
+    delete serverMain;
     return 0;
 }
