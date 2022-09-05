@@ -96,7 +96,7 @@ int acceptCon(int socket_fd) {
 
 int main() {
     // Server Constants
-    const int serverPort = 5556;
+    const int serverPort = 5555;
     const int k = 5;
 
     // Threads count
@@ -119,8 +119,8 @@ int main() {
     ListenForCon(sockFd);
 
     while (true) {
-        // Add a timeout mechanism
-        int retval = timeout(sockFd, 60);
+        // TODO: Add a timeout mechanism
+        int retval = timeout(sockFd, 10);
 
         if (retval < 0) {
             perror("Error with the socket!");

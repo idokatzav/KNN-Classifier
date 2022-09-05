@@ -10,7 +10,7 @@ void UploadCommand::execute() {
 
         std::string classifiedData = m_dio->read();
 
-        if (classifiedData == "ERROR") {
+        if (classifiedData == "\\ERROR") {
             return;
         }
 
@@ -20,7 +20,7 @@ void UploadCommand::execute() {
 
         std::string unclassifiedData = m_dio->read();
 
-        if (unclassifiedData == "ERROR") {
+        if (unclassifiedData == "\\ERROR") {
             return;
         }
 

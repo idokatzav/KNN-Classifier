@@ -34,8 +34,6 @@ public:
      * Stop running.
      */
     void stopRunning();
-
-    ~SocketIO() = default;
 };
 
 #endif
