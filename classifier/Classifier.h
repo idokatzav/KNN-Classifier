@@ -21,10 +21,9 @@ private:
     std::string m_confusionMatrixStr;
 
     /**
-    * creates a string contains the confusion matrix
-    * @return the string wih the information.
-    */
-    std::string confusionMatrix();
+     * creates a string contains the confusion matrix
+     */
+    void confusionMatrix();
 
 public:
     /**
