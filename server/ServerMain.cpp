@@ -31,10 +31,12 @@ void handleThreads(threadsAndSockets* threads) {
         if (!(*threads)[i].second->isRunning()) {
             (*threads)[i].first.join();
             delete (*threads)[i].second;
+
             if (i != size - 1) {
                 (*threads)[i].first.swap((*threads)[size - 1].first);
                 (*threads)[i].second = (*threads)[size - 1].second;
             }
+
             (*threads).pop_back();
         }
     }
@@ -100,7 +102,7 @@ int acceptCon(int socket_fd) {
 
 int main() {
     // Server Constants
-    const int serverPort = 5556;
+    const int serverPort = 5555;
     const int k = 5;
 
     // Threads count
@@ -124,7 +126,7 @@ int main() {
 
     while (true) {
         // Add a timeout mechanism
-        int retval = timeout(sockFd, 10);
+        int retval = timeout(sockFd, 60);
 
         if (retval < 0) {
             perror("Error with the socket!");
