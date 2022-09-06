@@ -51,7 +51,7 @@ Running the server can be achieved by:
 ```
 Running the client:
 ```bash
-./Client [UNCLASSIFIED-DATA-PATH] [OUTPUT-PATH]
+./Client
 ```
 
 ## Design
