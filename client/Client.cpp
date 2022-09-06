@@ -95,6 +95,7 @@ void Client::communicate() {
             upload();
         } else {
             general();
+            m_message.clear();
         }
     }
 

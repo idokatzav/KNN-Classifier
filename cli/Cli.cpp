@@ -26,9 +26,11 @@ void Cli::start() {
     }
 
     menu += std::to_string(size + 1) + ". exit\n";
-
+    bool lastWithError = false;
     while(true) {
-        m_dio->write(menu);
+        if (!lastWithError) {
+            m_dio->write(menu);
+        }
 
         // Execute the chosen command
         int index = -1;
@@ -37,16 +39,18 @@ void Cli::start() {
              index = std::stoi(m_dio->read());
         } catch (const std::exception& e) {
             m_dio->write("\\InputPlease enter a number\n");
+            lastWithError = true;
             continue;
         }
-
+        lastWithError = false;
         if (index == size + 1) {
             m_dio->write("exit\n");
             break;
         }
 
         if (index <= 0 || index > size) {
-            m_dio->write("\\InputInvalid command\n");
+            m_dio->write("\\InputInvalid command, try to type again a valid one:\n");
+            lastWithError = true;
             continue;
         }
 

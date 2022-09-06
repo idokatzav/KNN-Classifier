@@ -31,15 +31,11 @@ void handleThreads(threadsAndSockets* threads) {
         if (!(*threads)[i].second->isRunning()) {
             (*threads)[i].first.join();
             delete (*threads)[i].second;
-            if (size != 1 && i != 0 && i != size - 1) {
-                (*threads).erase((*threads).cbegin() + i-- + (size - size--));
-            } else {
-                if (i == 0) {
-                    (*threads)[0].first.swap((*threads)[size - 1].first);
-                    (*threads)[0].second = (*threads)[size - 1].second;
-                }
-                (*threads).pop_back();
+            if (i != size - 1) {
+                (*threads)[i].first.swap((*threads)[size - 1].first);
+                (*threads)[i].second = (*threads)[size - 1].second;
             }
+            (*threads).pop_back();
         }
     }
 }
