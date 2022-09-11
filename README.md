@@ -147,6 +147,14 @@ graph LR;
     recv --> write;
 ```
 
+### Our protocol
+We created a protocol which is used to let the server and user to know what to do with the input it got from the other.
+**\Input**: This tags means that the part of the program that got a message which is started with that tag, will ask for input.
+.
+.
+.
+
+
 ## Authors
 [Jonathan Kelsi](https://github.com/JonathanKelsi)  
 [Ido Katzav](https://github.com/idokatzav)
