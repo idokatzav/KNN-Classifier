@@ -166,9 +166,9 @@ simple, and best described by the following:
 graph LR;
     Listen-->Accept;
     Accept.->Handle-First-Client-->Wait-Till-Finished;
-    Accept.->Handle-First-Client-->Wait-Till-Finished;
+    Accept.->Handle-Second-Client-->Wait-Till-Finished;
     Accept.->Handle-Third-Client-->Wait-Till-Finished;
-    Listen-.timeout.->Close;
+    Listen-.timeout.->Wait-Till-Finished;
     Wait-Till-Finished-->Close;
 ```
 With greater details: After creating and binding a socket,
