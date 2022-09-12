@@ -57,7 +57,9 @@ Running the client:
 ## Design
 
 <details>
-<summary>### Classified, Distance and Classifier_Server</summary>
+<summary
+<b>Classified, Distance and Classifier_Server</b>
+</summary>
 <p>
 **Distance:** In order to get another level of abstraction, we've created
 the pure virtual class *Distance*, and gave it some concrete
