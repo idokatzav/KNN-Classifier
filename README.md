@@ -183,19 +183,16 @@ The server uses port 5555.
 **Note:** the timeout window is 60 seconds.
 
 <br>
-<br>
 **The client:** The client's workflow is also uncomplicated.
 First, the client creates a socket and connects to the server.
-Then, the client reads the unclassified data from the provided path,
-and sends it to the server. Finally, the client receives the
-classifications from the server and writes them to the provide
-output path.
+Then, the client reads messages from the server and ouputs them to the user,
+Finally, the client receives input from the user, and sends it to the server.
+And this process keeps on repeating, untill the client decides to exit.
 ```mermaid
 graph LR;
-    connect --> read;
-    read --> send;
-    send --> recv;
-    recv --> write;
+    connect --> server;
+    server --read--> user;
+    user --send--> server;
 ```
 
 ### Our protocol
