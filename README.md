@@ -56,9 +56,9 @@ Running the client:
 
 ## Design
 
-### Distance
+### Classified, Distance and Classifier
 
-In order to get another level of abstraction, we've created
+**Distance:** In order to get another level of abstraction, we've created
 the pure virtual class *Distance*, and gave it some concrete
 subclasses, such as *EuclideanDistance*, *ManhattanDistance*
 and *ChebyshevDistance*.
@@ -66,13 +66,12 @@ and *ChebyshevDistance*.
 class Distance {
 public:
     virtual double distance(const std::vector<double>& v1, const std::vector<double>& v2) const = 0;
-     virtual ~Distance() = default;
+    virtual ~Distance() = default;
 };
 ```
 The class represents an abstract metric, and is used
 to achieve generality through polymorphism at the KNN classifier.
 
-### Classified and Classifier
 
 **Classified:** The classifier must classify something, and so, from the
 need of representing a point in a dataset, this class was born.
@@ -94,11 +93,13 @@ needed by the server:
 ```c++
 class Classifier {
 private:
+    // ...
     int m_k;
     bool m_isInit;
     std::vector<std::unique_ptr<Classified>> m_classifiedResult;
 
 public:
+    // ...
     void init(const std::string& dataPath);
     
     void classify(Classified& unclassified, const Distance& metric) const;
@@ -106,6 +107,55 @@ public:
     std::string classify(const std::string& uploadedData, const Distance& metric) const;
 };
 ```
+
+### I/O
+
+In order to support multiple I/O types by the server, we created the DefaultIO class::
+```c++
+class DefaultIO {
+    // ...
+    virtual string read() = 0;
+    virtual void write(string message) = 0;
+};
+```
+By inheriting and implementing the SocketIO class, we were able to give the server a way of communication with a remote client. 
+
+### Commands
+
+To achieve greater flexibility, we created the pure abstract class Command:
+```c++
+class Command {
+private:
+    // ...
+    std::string description;
+     DefaultIO* m_dio;
+    
+public:
+    // ...
+    virtual void execute() = 0;
+};
+```
+Each class the inherits Command and implements the execute() method, can run by the server. 
+
+
+### CLI
+
+To encapsulate the commands and their running procedure, we created the CLI class:
+```c++
+class Cli {
+private:
+    // ...
+    DefaultIO* m_dio;
+    std::vector<Command*> m_commands;
+
+public:
+    // ...
+    void start();
+};
+```
+The class is responsible of running the commands, using the I/O mechanic given by the server. 
+
+
 ### The Client And The Server
 
 **The server:** With the above classes implemented, the creation of
@@ -115,28 +165,28 @@ simple, and best described by the following:
 ```mermaid
 graph LR;
     Listen-->Accept;
-    Accept-->recv;
-    recv-->Classify;
-
-    init-->Classifier;
-    Classifier-->Classify;
-    Classify-->send;
+    Accept.->Client-Handling-->Wait-Till-Finished;
+    Accept.->Client-Handling-->Wait-Till-Finished;
+    Accept.->Client-Handling-->Wait-Till-Finished;
+    Listen-.timeout.->Close;
+    Wait_For_Users-->Close;
 ```
 With greater details: After creating and binding a socket,
 the server listens and accepts a client. When the two are connected,
-the server communicates with the user through a CLI,
+the server creates a thread in order to handle multiple clients, 
+and communicates with the user through the CLI it creates,
 which allows the user to control the classifier's parameters, it's train files,
 the files it classifies and to get an analysis of the classifications.
 
 The server uses port 5555.
 
-**Note:** The KNN classification is done using ```k = 5``` and
-the Euclidean metric.
+**Note:** the timeout window is 60 seconds.
+
 <br>
 <br>
-**The client:** The client's workflow is too, fairly simple.
-First, the client creates a m_socket and connects to the server.
-Then, client reads the unclassified data from the provided path,
+**The client:** The client's workflow is also uncomplicated.
+First, the client creates a socket and connects to the server.
+Then, the client reads the unclassified data from the provided path,
 and sends it to the server. Finally, the client receives the
 classifications from the server and writes them to the provide
 output path.
