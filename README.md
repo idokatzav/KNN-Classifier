@@ -56,10 +56,7 @@ Running the client:
 
 ## Design
 
-<details>
-<summary
-<b>Classified, Distance and Classifier_Server</b>
-</summary>
+### Classified, Distance and Classifier_Server
 **Distance:** In order to get another level of abstraction, we've created
 the pure virtual class *Distance*, and gave it some concrete
 subclasses, such as *EuclideanDistance*, *ManhattanDistance*
@@ -109,7 +106,7 @@ public:
     std::string classify(const std::string& uploadedData, const Distance& metric) const;
 };
 ```
-</details>
+
 ### I/O
 
 In order to support multiple I/O types by the server, we created the DefaultIO class::
