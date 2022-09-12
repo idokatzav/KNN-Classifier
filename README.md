@@ -56,7 +56,7 @@ Running the client:
 
 ## Design
 
-### Classified, Distance and Classifier
+### Classified, Distance and Classifier_Server
 
 **Distance:** In order to get another level of abstraction, we've created
 the pure virtual class *Distance*, and gave it some concrete
@@ -165,11 +165,11 @@ simple, and best described by the following:
 ```mermaid
 graph LR;
     Listen-->Accept;
-    Accept.->Client-Handling-->Wait-Till-Finished;
-    Accept.->Client-Handling-->Wait-Till-Finished;
-    Accept.->Client-Handling-->Wait-Till-Finished;
+    Accept.->Handle-First-Client-->Wait-Till-Finished;
+    Accept.->Handle-First-Client-->Wait-Till-Finished;
+    Accept.->Handle-Third-Client-->Wait-Till-Finished;
     Listen-.timeout.->Close;
-    Wait_For_Users-->Close;
+    Wait-Till-Finished-->Close;
 ```
 With greater details: After creating and binding a socket,
 the server listens and accepts a client. When the two are connected,
