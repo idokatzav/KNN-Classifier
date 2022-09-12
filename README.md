@@ -4,20 +4,6 @@ This repository provides a server-side and a client-side system that
 implements the  [k-nearest neighbors algorithm](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm), 
 using different metrics to classify new data, based on given data.
 
-## Table Of Contents
-[Getting Started](#Getting-Started)
-* [Dependencies](#Dependencies)
-* [Installation](#Installation)
-* [Executing The Program](#Executing-The-Program)
-
-[Design](#Design)
-* [Distance](#Distance)
-* [Classified and Classifier](#Classified-and-Classifier)
-* [The Client And The Server](#The-Client-And-The-Server)
-
-[Authors](#Authors)
-
-[Acknowledgments](#Acknowledgments)
 
 
 ## Getting Started
@@ -107,6 +93,7 @@ public:
 };
 ```
 
+<details>
 ### I/O
 
 In order to support multiple I/O types by the server, we created the DefaultIO class::
@@ -136,6 +123,7 @@ public:
 ```
 Each class the inherits Command and implements the execute() method, can run by the server. 
 
+</details>
 
 ### CLI
 
@@ -177,11 +165,9 @@ and communicates with the user through the CLI it creates,
 which allows the user to control the classifier's parameters, it's train files,
 the files it classifies and to get an analysis of the classifications.
 
-The server uses port 5555.
 
-**Note:** the timeout window is 60 seconds.
+**Note:** the timeout window is 60 seconds, and the server uses port 5555.
 
-<br>
 **The client:** The client's workflow is also uncomplicated.
 First, the client creates a socket and connects to the server.
 Then, the client reads messages from the server and ouputs them to the user,
@@ -215,4 +201,3 @@ algorithms we used, we've relied on the following sources:
 * [Stackoverflow](https://stackoverflow.com/questions)
 * [die.net](https://linux.die.net/)
 * [man7.org](https://man7.org/linux/man-pages/)
-
