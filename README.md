@@ -122,12 +122,11 @@ graph LR;
     Classifier-->Classify;
     Classify-->send;
 ```
-With greater details: After creating and binding a m_socket,
+With greater details: After creating and binding a socket,
 the server listens and accepts a client. When the two are connected,
-the server receives the unclassified data from the user,
-and classifies it with a classifier, initialized with local data.
-When The classification is done, the server sends the results
-to the client.
+the server communicates with the user through a CLI,
+which allows the user to control the classifier's parameters, it's train files,
+the files it classifies and to get an analysis of the classifications.
 
 The server uses port 5555.
 
