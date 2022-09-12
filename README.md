@@ -129,6 +129,8 @@ and classifies it with a classifier, initialized with local data.
 When The classification is done, the server sends the results
 to the client.
 
+The server uses port 5555.
+
 **Note:** The KNN classification is done using ```k = 5``` and
 the Euclidean metric.
 <br>
