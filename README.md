@@ -60,7 +60,6 @@ Running the client:
 <summary
 <b>Classified, Distance and Classifier_Server</b>
 </summary>
-<p>
 **Distance:** In order to get another level of abstraction, we've created
 the pure virtual class *Distance*, and gave it some concrete
 subclasses, such as *EuclideanDistance*, *ManhattanDistance*
@@ -110,7 +109,6 @@ public:
     std::string classify(const std::string& uploadedData, const Distance& metric) const;
 };
 ```
-</p>
 </details>
 ### I/O
 
