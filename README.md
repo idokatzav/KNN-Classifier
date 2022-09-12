@@ -93,7 +93,6 @@ public:
 };
 ```
 
-<details>
 ### I/O
 
 In order to support multiple I/O types by the server, we created the DefaultIO class::
@@ -123,7 +122,6 @@ public:
 ```
 Each class the inherits Command and implements the execute() method, can run by the server. 
 
-</details>
 
 ### CLI
 
