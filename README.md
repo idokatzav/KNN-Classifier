@@ -190,9 +190,9 @@ Finally, the client receives input from the user, and sends it to the server.
 And this process keeps on repeating, untill the client decides to exit.
 ```mermaid
 graph LR;
-    connect --> server;
-    server --read--> user;
-    user --send--> server;
+    client --connect --> server;
+    user --read -->  server;
+    server --send --> user;
 ```
 
 ### Our protocol
