@@ -180,7 +180,16 @@ graph LR;
 
 ### Our protocol
 We created a protocol which is used to let the server and user to know what to do with the input it got from the other.
-**\Input**: This tags means that the part of the program that got a message which is started with that tag, will ask for input.
+
+**\Input**: This tag means that the part of the program that got a message which is started with that tag, will ask for input.
+
+**\Upload**: This tag means that what is written after it will be a message that after printing it to the user, he'll enter a path of file for input.
+
+**\Download**: This tag means that what is written after it untill and "\End" tag, will be downloaded to a file in path that the client will give.
+
+**\End**: Indicates where is the end of a "\Download" tag.
+
+
 .
 .
 .
