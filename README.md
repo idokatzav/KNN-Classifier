@@ -208,3 +208,4 @@ algorithms we used, we've relied on the following sources:
 * [Stackoverflow](https://stackoverflow.com/questions)
 * [die.net](https://linux.die.net/)
 * [man7.org](https://man7.org/linux/man-pages/)
+* [cppreference](https://en.cppreference.com/w/)
